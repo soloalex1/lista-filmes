@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import AppContainer from "./containers/AppContainer";
 
-ReactDOM.render(<App />, document.querySelector('[data-js="app"]'));
+ReactDOM.render(<AppContainer />, document.querySelector('[data-js="app"]'));
