@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import List from "../../components/List";
 import Screen from "../../components/Screen";
 import useDebounce from "../../hooks/useDebounce";
 import useFetch from "../../hooks/useFetch";
@@ -19,6 +20,7 @@ const HomeScreenContainer = () => {
   useEffect(() => {
     setListaFilmes(test.response?.results);
     console.log("lista de filmes", listaFilmes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceConsulta]);
 
   useEffect(() => {

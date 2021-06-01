@@ -8,7 +8,7 @@ describe("Componente Header", () => {
   });
 
   test("o componente mostra um título", () => {
-    render(<Header title="teste" />);
+    render(<Header name="teste" />);
     expect(screen.getByText(/teste/i)).toBeInTheDocument();
   });
 

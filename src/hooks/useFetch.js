@@ -4,7 +4,7 @@ const KEY = "c391f33dc3ceb9d568d495ecc681876d";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 const useFetch = (query) => {
-  const url = `${BASE_URL}${query}?api_key=${KEY}`;
+  const url = `${BASE_URL}${query}?api_key=${KEY}&language=pt-BR`;
 
   const [response, setResponse] = useState(null);
 
