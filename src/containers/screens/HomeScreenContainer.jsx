@@ -18,7 +18,9 @@ const HomeScreenContainer = () => {
   const test = useFetch("/trending/movie/day");
 
   useEffect(() => {
-    setListaFilmes(test.response?.results);
+    if (test.response) {
+      setListaFilmes([...test?.response?.results]);
+    }
     console.log("lista de filmes", listaFilmes);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceConsulta]);
@@ -31,25 +33,18 @@ const HomeScreenContainer = () => {
   }, [debounceConsulta]);
 
   return (
-    // <Screen title="Página Inicial">
-    <div>
-      <input
-        className="shadow-md rounded-sm w-3/4 p-3"
-        type="text"
-        value={consulta}
-        onChange={(e) => handleChange(e)}
-      />
+    <Screen title="Página Inicial">
+      <div>
+        <input
+          className="shadow-md rounded-sm w-3/4 p-3"
+          type="text"
+          value={consulta}
+          onChange={(e) => handleChange(e)}
+        />
 
-      <ul>
-        {listaFilmes.length &&
-          listaFilmes.map((filme) => (
-            <li key={filme.id}>
-              {filme.popularity} - {filme.title}
-            </li>
-          ))}
-      </ul>
-    </div>
-    // </Screen>
+        {listaFilmes.length && <List list={listaFilmes} />}
+      </div>
+    </Screen>
   );
 };
 
