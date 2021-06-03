@@ -1,56 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import List from "../../components/List";
-import Loading from "../../components/Loading";
 import Screen from "../../components/Screen";
-import useDebounce from "../../hooks/useDebounce";
 import useFetch from "../../hooks/useFetch";
+import { setMoviesList } from "../../redux/actions";
 
 const HomeScreenContainer = () => {
-  const [consulta, setConsulta] = useState("");
+  const { response, loading, error } = useFetch("/trending/movie/day");
 
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    setConsulta(e.target.value);
-  };
-
-  const [listaFilmes, setListaFilmes] = useState([]);
-
-  const debounceConsulta = useDebounce(consulta);
-
-  const test = useFetch("/trending/movie/day");
+  const store = useSelector((state) => state);
 
   useEffect(() => {
-    if (test.response) {
-      setLoading(true);
-      setListaFilmes([...test?.response?.results]);
-      setLoading(false);
-    }
-    console.log("lista de filmes", listaFilmes);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounceConsulta]);
+    dispatch(setMoviesList(response));
+    // eslint-disable-next-line
+  }, [response]);
 
   useEffect(() => {
-    if (debounceConsulta) {
-    } else {
-      setListaFilmes([]);
-    }
-  }, [debounceConsulta]);
+    console.log("store", store);
+  }, [store]);
 
   return (
     <Screen title="Página Inicial">
-      <div>
-        {loading && <Loading />}
-        <input
-          className="shadow-md rounded-sm w-3/4 p-3"
-          type="text"
-          value={consulta}
-          onChange={(e) => handleChange(e)}
-        />
-
-        <button onClick={() => setLoading(true)}>loading</button>
-
-        {listaFilmes.length && <List list={listaFilmes} />}
+      <div className="container my-12 mx-auto px-4 md:px-12">
+        <List />
       </div>
     </Screen>
   );

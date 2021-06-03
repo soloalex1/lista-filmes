@@ -4,10 +4,7 @@ const Screen = ({ title, children, arrowBack = false, ...attr }) => {
   return (
     <>
       <Header name={title} arrowBack={arrowBack} />
-      <main
-        className="bg-gray-50 container my-12 mx-auto px-4 md:px-12 w-screen"
-        {...attr}
-      >
+      <main className="bg-gray-50 w-screen" {...attr}>
         {children}
       </main>
     </>

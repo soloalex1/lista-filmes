@@ -1,9 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore } from "redux";
+import { movieReducer } from "./reducers";
 
-import moviesReducer from "./slices/movie.slice";
+const initialState = {
+  moviesList: {},
+  movieInfo: {},
+};
 
-export default configureStore({
-  reducer: {
-    movies: moviesReducer,
-  },
-});
+export const createReduxStore = () => {
+  return createStore(movieReducer, initialState);
+};

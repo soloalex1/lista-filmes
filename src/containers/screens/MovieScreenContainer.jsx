@@ -8,13 +8,33 @@ const MovieScreenContainer = ({ match }) => {
 
   // const movie = useSelector((state) => state);
 
-  const movie = useFetch(`/movie/${id}`);
+  const filme = useFetch(`/movie/${id}`);
 
-  useEffect(() => {}, [movie]);
+  useEffect(() => {}, [filme]);
 
   return (
-    <Screen title={movie?.response?.title} arrowBack>
-      <h2 className="mt-20">{movie?.response?.original_title}</h2>
+    <Screen title={filme?.response?.title} arrowBack>
+      <div
+        className="max-w-screen h-full bg-cover bg-center object-contain"
+        style={{
+          backgroundImage: `url()`,
+        }}
+      >
+        <img
+          src={`https://image.tmdb.org/t/p/original/${filme?.response?.backdrop_path}`}
+          alt={filme?.response?.title}
+        />
+      </div>
+      <h2 className="">{filme?.response?.title}</h2>
+      <img
+        src={`https://image.tmdb.org/t/p/original/${filme?.response?.poster_path}`}
+        alt="Backdrop"
+      />
+
+      {filme?.response?.genres.map((genero) => (
+        <h3>{genero.name}</h3>
+      ))}
+      <p>{filme?.response?.overview}</p>
     </Screen>
   );
 };
