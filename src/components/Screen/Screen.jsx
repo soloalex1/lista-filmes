@@ -2,10 +2,15 @@ import Header from "../Header";
 
 const Screen = ({ title, children, arrowBack = false, ...attr }) => {
   return (
-    <main className="bg-gray-50" {...attr}>
+    <>
       <Header name={title} arrowBack={arrowBack} />
-      {children}
-    </main>
+      <main
+        className="bg-gray-50 container my-12 mx-auto px-4 md:px-12"
+        {...attr}
+      >
+        {children}
+      </main>
+    </>
   );
 };
 

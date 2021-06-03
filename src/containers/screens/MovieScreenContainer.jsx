@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Screen from "../../components/Screen";
 import { useEffect } from "react";
 
 const MovieScreenContainer = ({ match }) => {
   const { id } = match.params;
 
-  const movie = useSelector((state) => state);
+  // const movie = useSelector((state) => state);
+
+  const movie = useFetch(`/movie/${id}`);
 
   useEffect(() => {}, [movie]);
 

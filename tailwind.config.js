@@ -1,8 +1,11 @@
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false,
+  darkMode: "media",
   theme: {
-    extend: {},
+    fontFamily: {
+      title: ["Poppins", "sans-serif"],
+      body: ["Lato", "sans-serif"],
+    },
   },
   variants: {
     extend: {},
