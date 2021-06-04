@@ -1,6 +1,6 @@
 import Header from "../Header";
 
-const Screen = ({ title, children, arrowBack = false, ...attr }) => {
+const Screen = ({ title = "", children, arrowBack = false, ...attr }) => {
   return (
     <>
       <Header name={title} arrowBack={arrowBack} />

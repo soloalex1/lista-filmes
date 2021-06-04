@@ -2,6 +2,8 @@ import Screen from "../../components/Screen";
 import { useEffect, useState } from "react";
 import client from "../../api";
 
+import Chip from "../../components/Chip";
+
 const MovieScreenContainer = ({ match }) => {
   const { id } = match.params;
 
@@ -33,46 +35,52 @@ const MovieScreenContainer = ({ match }) => {
   }, [id]);
 
   return (
-    <Screen title={filme?.title} arrowBack>
+    <Screen arrowBack>
       <section
-        className="relative top-0 left-0 w-screen h-full text-white bg-gray-300 bg-cover bg-full bg-center grid grid-cols-5 grid-rows-4"
+        className="absolute top-0 left-0 w-screen h-full text-white bg-cover bg-full bg-center "
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${filme?.backdrop_path})`,
         }}
       >
-        <div className="col-span-2 row-span-2 bg-opacity-80 flex justify-start items-center">
-          <h1 className="font-title font-bold text-6xl flex-grow px-8 justify-self-end">
-            {filme?.title}
-          </h1>
-          <h2>{filme?.release_date}</h2>
-        </div>
-        <div
-          className="col-span-3 row-span-2 row-start-3 grid grid-cols-2 grid-rows-2
-          gap-2 rounded-tr-3xl bg-opacity-30 bg-white backdrop-filter backdrop-blur-xl
-           text-gray-500 shadow-md"
-        >
-          <div id="sinopse" className="row-span-2 p-4">
-            <h3 className="font-title font-bold text-xl">Sinopse</h3>
-            <p className="font-body">{filme?.overview}</p>
+        <div className="w-full h-full grid grid-cols-5 grid-rows-4 bg-blend-multiply bg-gradient-to-r from-gray-900 to-transparent">
+          <div className="col-span-3 row-span-2 bg-opacity-80 flex justify-start items-center">
+            <h1 className="font-title font-bold text-6xl flex-grow px-8 justify-self-end leading-normal">
+              {filme?.title}
+            </h1>
+            <h2 className="font-body flex-grow-0 text-2xl">{filme?.tagline}</h2>
+            <h3>{new Date(filme?.release_date).toLocaleDateString()}</h3>
           </div>
-          <div id="categoria" className=" p-4">
-            <h3 className="font-title font-bold text-xl">Categoria</h3>
-            <p className="font-body">
-              {filme?.genres?.reduce((acc, curr) => acc + curr.name, "")}
-            </p>
-          </div>
-          <div id="categoria" className="p-4">
-            <h3 className="font-title font-bold text-xl">Estrelando</h3>
-            <p className="font-body">
-              {credits?.crew
-                ?.sort((a, b) => a.popularity < b.popularity)
-                .filter((i, index) => {
-                  if (index <= 5) return i;
-                })
-                .map((i) => {
-                  return `${i.name}, `;
-                })}
-            </p>
+          <div
+            className="col-span-3 row-span-2 row-start-3 grid grid-cols-2 grid-rows-2
+          gap-6 rounded-tr-3xl bg-opacity-40 bg-white backdrop-filter backdrop-blur-xl
+           text-gray-300 text-shadow shadow-md px-8 py-4"
+          >
+            <div id="sinopse" className="row-span-2">
+              <h3 className="font-title font-bold text-xl mb-2">Sinopse</h3>
+              <p className="font-body text-justify">{filme?.overview}</p>
+            </div>
+
+            <div id="elenco" className="">
+              <h3 className="font-title font-bold text-xl mb-2">Elenco</h3>
+              <p className="font-body">
+                {credits?.crew
+                  ?.sort((a, b) => a.popularity < b.popularity)
+                  .filter((i, index) => {
+                    if (index <= 5) return i;
+                  })
+                  .map((i) => (
+                    <Chip key={i.id} label={i.name} />
+                  ))}
+              </p>
+            </div>
+            <div id="categorias" className="">
+              <h3 className="font-title font-bold text-xl mb-2">Gênero</h3>
+              <div className="">
+                {filme?.genres?.map((genre) => (
+                  <Chip key={genre.id} label={genre.name} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
