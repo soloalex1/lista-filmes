@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import useDebounce from "../../hooks/useDebounce";
 
+import useDebounce from "../../hooks/useDebounce";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { setMoviesList } from "../../redux/actions";
+import client from "../../api";
 
 const Search = ({ ...attr }) => {
   const [consulta, setConsulta] = useState("");
@@ -17,16 +18,15 @@ const Search = ({ ...attr }) => {
 
   useEffect(() => {
     const movieSearch = async (query) => {
-      try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=c391f33dc3ceb9d568d495ecc681876d&language=pt-BR`
-        );
-        const json = await res.json();
+      if (query.trim().length === 0) return;
 
-        dispatch(setMoviesList(json));
-      } catch (error) {
-        console.log(error);
-      }
+      client(`search/movie?query=${query}&`)
+        .then((data) => {
+          dispatch(setMoviesList(data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     movieSearch(debounceConsulta);

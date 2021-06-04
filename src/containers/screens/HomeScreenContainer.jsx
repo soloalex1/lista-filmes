@@ -1,18 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import client from "../../api";
 import List from "../../components/List";
 import Screen from "../../components/Screen";
-import useFetch from "../../hooks/useFetch";
 import { setMoviesList } from "../../redux/actions";
 
 const HomeScreenContainer = () => {
-  const movies = useFetch("/trending/movie/day");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setMoviesList(movies.response));
+    client("trending/movie/day?")
+      .then((data) => {
+        console.log(data);
+        dispatch(setMoviesList(data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     // eslint-disable-next-line
-  }, [movies.response]);
+  }, []);
 
   return (
     <Screen title="Página Inicial">
