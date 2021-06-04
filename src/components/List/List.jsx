@@ -12,6 +12,7 @@ const List = ({ ...attr }) => {
     if (hasMovies) {
       setLista(moviesList.results);
     }
+    // eslint-disable-next-line
   }, [moviesList]);
 
   return (

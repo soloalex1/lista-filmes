@@ -24,5 +24,6 @@ div[data-js="app"] {
   width: 100vw;
   padding: 0;
   margin: 0;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  overflow-y: initial;
 }

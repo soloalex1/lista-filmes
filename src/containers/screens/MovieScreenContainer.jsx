@@ -13,15 +13,12 @@ const MovieScreenContainer = ({ match }) => {
 
   return (
     <Screen title={filme?.response?.title} arrowBack>
-      <section className="relative top-0 left-0 w-screen h-full text-white bg-gray-300 bg-cover bg-full bg-center grid grid-cols-5 grid-rows-4">
-        <div
-          className="absolute w-full h-full bg-center bg-cover"
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${filme?.response?.backdrop_path})`,
-          }}
-        >
-          <div id="movie-content"></div>
-        </div>
+      <section
+        className="relative top-0 left-0 w-screen h-full text-white bg-gray-300 bg-cover bg-full bg-center grid grid-cols-5 grid-rows-4"
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/original/${filme?.response?.backdrop_path})`,
+        }}
+      >
         <div className="col-span-2 row-span-2 bg-opacity-80 flex justify-start items-center">
           <h1 className="font-title font-bold text-6xl flex-grow px-8 justify-self-end">
             {filme?.response?.title}
