@@ -2,9 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @variants responsive {
+    .text-shadow {
+      text-shadow: 0 2px 4px black;
+    }
+    /* .text-shadow-md {
+      text-shadow: 4px 4px 8px black;
+    }
+    .text-shadow-lg {
+      text-shadow: 15px 15px 30px black;
+    }
+    .text-shadow-none {
+      text-shadow: none;
+    } */
+  }
+}
+
 div[data-js="app"] {
   height: 100vh;
   width: 100vw;
   padding: 0;
   margin: 0;
+  overflow-y: hidden;
 }

@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 const List = ({ ...attr }) => {
   const [lista, setLista] = useState([]);
 
-  const store = useSelector((state) => state);
+  const moviesList = useSelector((state) => state.moviesList);
 
   useEffect(() => {
-    setLista([...store.moviesList.results]);
-  }, []);
+    setLista([moviesList.results]);
+    console.log(moviesList);
+  }, [moviesList]);
 
   return (
     <section
