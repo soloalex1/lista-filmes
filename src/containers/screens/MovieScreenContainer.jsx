@@ -7,6 +7,8 @@ const MovieScreenContainer = ({ match }) => {
 
   const [filme, setFilme] = useState({});
 
+  const [credits, setCredits] = useState({});
+
   useEffect(() => {
     client(`/movie/${id}?`)
       .then((data) => {
@@ -16,18 +18,19 @@ const MovieScreenContainer = ({ match }) => {
         console.log(error);
       });
 
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     client(`movie/${id}/credits?`)
       .then((data) => {
-        setFilme({
-          ...filme,
-          credits: data,
-        });
+        setCredits(data);
+        console.log(credits);
       })
       .catch((error) => {
         console.log(error);
       });
-    //eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   return (
     <Screen title={filme?.title} arrowBack>
@@ -54,13 +57,15 @@ const MovieScreenContainer = ({ match }) => {
           </div>
           <div id="categoria" className=" p-4">
             <h3 className="font-title font-bold text-xl">Categoria</h3>
-            <p className="font-body">{filme?.genres[0].name}</p>
+            <p className="font-body">
+              {filme?.genres?.reduce((acc, curr) => acc + curr.name, "")}
+            </p>
           </div>
           <div id="categoria" className="p-4">
             <h3 className="font-title font-bold text-xl">Estrelando</h3>
             <p className="font-body">
-              {filme?.credits?.crew
-                .sort((a, b) => a.popularity < b.popularity)
+              {credits?.crew
+                ?.sort((a, b) => a.popularity < b.popularity)
                 .filter((i, index) => {
                   if (index <= 5) return i;
                 })

@@ -7,7 +7,7 @@ const Card = ({ filme, ...attr }) => {
       className="block w-full shadow-lg overflow-hidden rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
       {...attr}
     >
-      <div className="relative h-full w-full bg-blend-multiply z-20 rounded-lg bg-gradient-to-r from-gray-900 to-transparent py-4 px-2">
+      <div className="relative h-full min-h-full w-full flex items-end bg-blend-multiply z-20 rounded-lg bg-gradient-to-r from-gray-900 to-transparent py-4 px-2">
         <div className="p-6">
           <h4 className="text-gray-300">
             {new Date(filme.release_date).getFullYear()}

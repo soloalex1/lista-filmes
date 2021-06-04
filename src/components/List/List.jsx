@@ -18,7 +18,7 @@ const List = ({ ...attr }) => {
 
   return (
     <section
-      className="grid grid-cols-1 lg:grid-cols-3 grid-rows-10 lg:grid-rows-5 gap-4 lg:gap-6 px-2 lg:px-4 my-4"
+      className="grid grid-cols-1 lg:grid-cols-3 grid-rows-10 lg:grid-rows-6 gap-4 lg:gap-6 px-2 lg:px-4 my-4"
       {...attr}
     >
       {hasMovies && lista.map((filme) => <Card key={filme.id} filme={filme} />)}

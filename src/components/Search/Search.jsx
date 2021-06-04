@@ -5,10 +5,12 @@ import useDebounce from "../../hooks/useDebounce";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { setMoviesList } from "../../redux/actions";
 import client from "../../api";
+import { useHistory } from "react-router";
 
 const Search = ({ ...attr }) => {
   const [consulta, setConsulta] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleChange = (e) => {
     setConsulta(e.target.value);
@@ -23,6 +25,7 @@ const Search = ({ ...attr }) => {
       client(`search/movie?query=${query}&`)
         .then((data) => {
           dispatch(setMoviesList(data));
+          history.push("/");
         })
         .catch((error) => {
           console.log(error);

@@ -9,8 +9,11 @@ const Header = ({ name, arrowBack = false, ...attr }) => {
   };
 
   return (
-    <header className="bg-green-300 h-16 py-2 px-6 max-w-full" {...attr}>
-      <nav className="h-full flex justify-between items-stretch">
+    <header
+      className="bg-transparent sticky z-30 h-16 py-2 px-12 w-full"
+      {...attr}
+    >
+      <nav className="h-full flex justify-between items-stretch lg:pl-4">
         <h2 className="text-2xl font-bold self-center">{name}</h2>
         {arrowBack && <button onClick={goBack}>Voltar</button>}
         <Search />
