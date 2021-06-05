@@ -20,8 +20,8 @@ const Search = ({ ...attr }) => {
 
   useEffect(() => {
     const movieSearch = async (query) => {
+      // se a consulta for zerada, reseta a lista de filmes
       if (query === "") {
-        console.log("query vazia  ");
         client(`trending/movie/day?`)
           .then((data) => {
             dispatch(setMoviesList(data));
@@ -42,8 +42,10 @@ const Search = ({ ...attr }) => {
           });
       }
 
-      if (query.trim().length === 0) return;
+      // depois de resetar, sai da função pra não sobrescrever
+      if (query?.trim().length === 0) return;
 
+      // se a consulta não estiver vazia, faz a requisição normal
       client(`search/movie?query=${query}&`)
         .then((data) => {
           dispatch(setMoviesList(data));
@@ -70,7 +72,7 @@ const Search = ({ ...attr }) => {
   }, [debounceConsulta]);
 
   return (
-    <div class=" inline-flex flex-col justify-center text-gray-500">
+    <div class=" inline-flex flex-col justify-center text-gray-500" {...attr}>
       <div class="relative w-full ">
         <input
           type="text"

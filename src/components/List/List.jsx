@@ -9,7 +9,7 @@ const List = ({ ...attr }) => {
   const hasMovies = !!moviesList?.results;
 
   useEffect(() => {
-    console.log("moviesList", moviesList);
+    // console.log("moviesList", moviesList);
     if (hasMovies) {
       setLista(moviesList.results);
     }
