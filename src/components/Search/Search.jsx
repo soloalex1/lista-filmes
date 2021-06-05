@@ -27,7 +27,15 @@ const Search = ({ ...attr }) => {
           dispatch(setMoviesList(data));
         })
         .then(() => {
-          history.push("/", { from: "/movie/:id" });
+          if (history.location?.pathname.includes("/movie")) {
+            // se tiver na página de filme, joga pra página inicial
+            history.push("/", { from: "/movie/:id" });
+          } else {
+            // senão, apaga o from
+            const state = { ...history.location.state };
+            delete state.from;
+            history.replace({ ...history.location, state });
+          }
         })
         .catch((error) => {
           console.log(error);

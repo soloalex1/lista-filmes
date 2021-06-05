@@ -28,6 +28,11 @@ const HomeScreenContainer = () => {
           console.log(error);
           setLoading(false);
         });
+    } else {
+      // senão, apaga o from
+      const state = { ...history.location.state };
+      delete state.from;
+      history.replace({ ...history.location, state });
     }
     setLoading(false);
 
