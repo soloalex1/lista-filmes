@@ -6,9 +6,19 @@ module.exports = {
       title: ["Poppins", "sans-serif"],
       body: ["Lato", "sans-serif"],
     },
+    extend: {
+      lineClamp: {
+        7: "7",
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+      },
+    },
   },
   variants: {
-    extend: {},
+    lineClamp: ["responsive", "hover"],
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

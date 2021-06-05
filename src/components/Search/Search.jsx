@@ -25,7 +25,9 @@ const Search = ({ ...attr }) => {
       client(`search/movie?query=${query}&`)
         .then((data) => {
           dispatch(setMoviesList(data));
-          history.push("/");
+        })
+        .then(() => {
+          history.push("/", { from: "/movie/:id" });
         })
         .catch((error) => {
           console.log(error);

@@ -4,7 +4,7 @@ const Screen = ({ title = "", children, arrowBack = false, ...attr }) => {
   return (
     <>
       <Header name={title} arrowBack={arrowBack} />
-      <main className="w-screen h-full mt-2" {...attr}>
+      <main className="w-full h-full mt-2" {...attr}>
         {children}
       </main>
     </>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import client from "../../api";
 import List from "../../components/List";
 import Loading from "../../components/Loading";
@@ -10,17 +11,26 @@ const HomeScreenContainer = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   useEffect(() => {
+    console.log("vim daqui: ", history.location?.state?.from);
     setLoading(true);
-    client("trending/movie/day?")
-      .then((data) => {
-        dispatch(setMoviesList(data));
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+
+    // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
+    if (history.location?.state?.from !== "/movie/:id") {
+      client("trending/movie/day?")
+        .then((data) => {
+          dispatch(setMoviesList(data));
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }
+    setLoading(false);
+
     // eslint-disable-next-line
   }, []);
 

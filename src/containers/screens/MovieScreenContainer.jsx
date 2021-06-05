@@ -57,7 +57,9 @@ const MovieScreenContainer = ({ match }) => {
           >
             <div id="sinopse" className="row-span-2">
               <h3 className="font-title font-bold text-xl mb-2">Sinopse</h3>
-              <p className="font-body text-justify">{filme?.overview}</p>
+              <p className="font-body text-justify line-clamp-10">
+                {filme?.overview}
+              </p>
             </div>
 
             <div id="elenco" className="">
