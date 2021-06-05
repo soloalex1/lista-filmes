@@ -20,6 +20,28 @@ const Search = ({ ...attr }) => {
 
   useEffect(() => {
     const movieSearch = async (query) => {
+      if (query === "") {
+        console.log("query vazia  ");
+        client(`trending/movie/day?`)
+          .then((data) => {
+            dispatch(setMoviesList(data));
+          })
+          .then(() => {
+            if (history.location?.pathname.includes("/movie")) {
+              // se tiver na página de filme, joga pra página inicial
+              history.push("/", { from: "/movie/:id" });
+            } else {
+              // senão, apaga o from
+              const state = { ...history.location.state };
+              delete state.from;
+              history.replace({ ...history.location, state });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
       if (query.trim().length === 0) return;
 
       client(`search/movie?query=${query}&`)
