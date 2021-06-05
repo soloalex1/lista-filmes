@@ -18,56 +18,53 @@ const Search = ({ ...attr }) => {
 
   const debounceConsulta = useDebounce(consulta);
 
-  useEffect(() => {
-    const movieSearch = async (query) => {
-      // se a consulta for zerada, reseta a lista de filmes
-      if (query === "") {
-        client(`trending/movie/day?`)
+  const movieSearch = (query) => {
+    const currentPath = history.location.pathname;
+    const previousPath = history.location?.state?.from;
+
+    if (currentPath === "/") {
+      // se estiver na página inicial e não tiver sido redirecionado
+      if (query === "" && previousPath !== "/movie/:id") {
+        // se a consulta estiver vazia, traz a pesquisa inicial
+        client("trending/movie/day?sort_by=popularity.desc&page=1&")
           .then((data) => {
             dispatch(setMoviesList(data));
           })
-          .then(() => {
-            if (history.location?.pathname.includes("/movie")) {
-              // se tiver na página de filme, joga pra página inicial
-              history.push("/", { from: "/movie/:id" });
-            } else {
-              // senão, apaga o from
-              const state = { ...history.location.state };
-              delete state.from;
-              history.replace({ ...history.location, state });
-            }
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        // se a consulta não estiver vazia, traz a pesquisa baseada na consulta
+        client(`search/movie?query=${query}&`)
+          .then((data) => {
+            dispatch(setMoviesList(data));
           })
           .catch((error) => {
             console.log(error);
           });
       }
-
-      // depois de resetar, sai da função pra não sobrescrever
-      if (query?.trim().length === 0) return;
-
-      // se a consulta não estiver vazia, faz a requisição normal
-      client(`search/movie?query=${query}&`)
-        .then((data) => {
-          dispatch(setMoviesList(data));
-        })
-        .then(() => {
-          if (history.location?.pathname.includes("/movie")) {
-            // se tiver na página de filme, joga pra página inicial
+    } else {
+      // se estiver na página de filme
+      if (query.trim().length !== 0) {
+        console.log("consulta não tá vazia");
+        // se a consulta não estiver vazia, faz a consulta normal
+        client(`search/movie?query=${query}&`)
+          .then((data) => {
+            dispatch(setMoviesList(data));
+          })
+          .then(() => {
+            // redireciona para a página inicial
             history.push("/", { from: "/movie/:id" });
-          } else {
-            // senão, apaga o from
-            const state = { ...history.location.state };
-            delete state.from;
-            history.replace({ ...history.location, state });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  };
 
+  useEffect(() => {
     movieSearch(debounceConsulta);
-
     // eslint-disable-next-line
   }, [debounceConsulta]);
 

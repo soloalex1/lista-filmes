@@ -27,7 +27,6 @@ const MovieScreenContainer = ({ match }) => {
     client(`movie/${id}/credits?`)
       .then((data) => {
         setCredits(data);
-        console.log(credits);
       })
       .catch((error) => {
         console.log(error);

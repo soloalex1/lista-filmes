@@ -21,12 +21,13 @@ const HomeScreenContainer = () => {
 
   const history = useHistory();
 
-  const getResults = (page = 1) => {
+  const getResultsPerPage = (page = 1) => {
     setLoading(true);
 
     // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
     if (history.location?.state?.from !== "/movie/:id") {
-      client(`discover/movie?sort_by=popularity.desc&page=${page}&`)
+      // console.log("from", history.location?.state?.from);
+      client(`trending/movie/day?sort_by=popularity.desc&page=${page}&`)
         .then((data) => {
           dispatch(setMoviesList(data));
           setLoading(false);
@@ -45,14 +46,7 @@ const HomeScreenContainer = () => {
   };
 
   useEffect(() => {
-    getResults();
-
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    console.log(page);
-    getResults(page);
+    getResultsPerPage(page);
     // eslint-disable-next-line
   }, [page]);
 

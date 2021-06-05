@@ -4,3 +4,10 @@ export const setMoviesList = (response) => ({
     response,
   },
 });
+
+export const getMoviesList = (response) => ({
+  type: "GET_MOVIES_LIST",
+  payload: {
+    response,
+  },
+});
