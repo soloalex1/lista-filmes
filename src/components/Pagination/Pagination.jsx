@@ -1,9 +1,14 @@
-const Pagination = ({
-  page,
-  onChangePage,
-  totalPages = 0,
-  totalResults = 0,
-}) => {
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+const Pagination = ({ page, onChangePage }) => {
+  const pageLength = useSelector((state) => state.moviesList.results?.length);
+  const totalResults = useSelector((state) => state.moviesList?.total_results);
+  const totalPages = useSelector((state) => state.moviesList?.total_pages);
+
+  const [minIndex, setMinIndex] = useState(1);
+  const [maxIndex, setMaxIndex] = useState(20);
+
   const nextPage = () => {
     const nextPage = page + 1;
     onChangePage(nextPage);
@@ -14,12 +19,18 @@ const Pagination = ({
     onChangePage(prevPage);
   };
 
+  useEffect(() => {
+    const currentMaxIndex = maxIndex;
+    setMinIndex(currentMaxIndex + 1);
+    setMaxIndex(pageLength * page);
+  }, [page]);
+
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm text-gray-700">
-            {`Mostrando ${page.min}-${page.max} de ${totalResults} resultados`}
+          <p className="text-sm text-gray-700 font-body">
+            {`Mostrando ${minIndex}-${maxIndex} de ${totalResults} resultados`}
           </p>
         </div>
         <div>
@@ -28,46 +39,18 @@ const Pagination = ({
             aria-label="Pagination"
           >
             <button
+              disabled={page === 1}
               onClick={prevPage}
-              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-body font-medium text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="sr-only">Anterior</span>
-              {/* <!-- Heroicon name: solid/chevron-left --> */}
-              <svg
-                className="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              Anterior
             </button>
-            {/* <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" --> */}
-
             <button
+              disabled={page === totalPages}
               onClick={nextPage}
-              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-body font-medium text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="sr-only">Próxima</span>
-              {/* <!-- Heroicon name: solid/chevron-left --> */}
-              <svg
-                className="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              Próxima
             </button>
           </nav>
         </div>
