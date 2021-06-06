@@ -69,7 +69,7 @@ const Search = ({ ...attr }) => {
   }, [debounceConsulta]);
 
   return (
-    <div class=" inline-flex flex-col justify-center text-gray-500" {...attr}>
+    <div class="inline-flex flex-col justify-center text-black" {...attr}>
       <div class="relative w-full ">
         <input
           type="text"
