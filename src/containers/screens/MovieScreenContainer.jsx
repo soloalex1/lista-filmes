@@ -26,28 +26,35 @@ const MovieScreenContainer = ({ match }) => {
   return (
     <Screen arrowBack>
       <section
-        className="absolute top-0 left-0 w-screen h-full text-white bg-cover bg-full bg-center "
+        className="absolute top-0 left-0 w-screen h-auto md:h-full text-white bg-cover bg-full bg-center "
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${filme?.backdrop_path})`,
         }}
       >
-        <div className="w-full md:h-full grid grid-cols-3 md:grid-cols-5 grid-rows-4 bg-blend-multiply bg-gradient-to-r from-gray-900 to-transparent">
-          <div className="col-span-3 row-span-2 bg-opacity-80 flex justify-start items-center">
-            <div>
-              <h1 className="font-title font-bold text-2xl md:text-5xl flex-grow px-8 justify-self-end leading-normal">
+        {/* grid da página toda */}
+        <div
+          id="main-grid"
+          className="w-full md:h-full grid grid-cols-4 md:grid-cols-5 grid-rows-6 md:grid-rows-4 bg-blend-multiply bg-gradient-to-r from-gray-900 to-transparent"
+        >
+          {/* informações do filme */}
+          <div className="col-span-4 row-span-2 bg-opacity-80 flex justify-start items-center">
+            <div className="px-4 md:px-8">
+              <h1 className="font-title font-bold text-2xl md:text-5xl flex-grow  justify-self-end leading-normal">
                 {filme?.title}
               </h1>
               {/* todo: flexbox do título e tagline */}
-              <h2 className="font-body flex-grow-0 text-md md:text-lg px-8">
+              <h2 className="font-body flex-grow-0 text-md md:text-lg">
                 {filme?.tagline}
               </h2>
             </div>
             <h3>{new Date(filme?.release_date).toLocaleDateString()}</h3>
           </div>
+
+          {/* sinopse e afins */}
           <div
-            className="col-span-3 row-span-2 row-start-3 grid grid-cols-2 grid-rows-4 md:grid-rows-2
-           gap-2 md:gap-6 rounded-tr-3xl bg-opacity-40 bg-white backdrop-filter backdrop-blur-xl
-           text-gray-300 text-shadow shadow-md px-8 py-4"
+            className="col-span-4 md:col-span-3 row-span-2 row-start-3 grid grid-cols-1 md:grid-cols-2 grid-rows-4 md:grid-rows-2
+           gap-2 md:gap-6 rounded-r-3xl md:rounded-tr-3xl bg-opacity-40 bg-white backdrop-filter backdrop-blur-xl
+           text-gray-300 text-shadow shadow-md px-4 md:px-8 py-4"
           >
             <div
               id="sinopse"
@@ -92,7 +99,7 @@ const MovieScreenContainer = ({ match }) => {
           {filme.videos &&
             filme.videos.results &&
             filme.videos.results.length > 0 && (
-              <div className="col-span-2 row-span-2 col-start-4 row-start-3 py-2 px-4 flex flex-col justify-end ">
+              <div className="col-span-4 md:col-span-2 row-span-2 md:col-start-4 row-start-5 py-2 px-4 flex flex-col justify-end ">
                 <h3 className="font-title font-bold text-md md:text-xl mb-2">
                   Vídeos Relacionados
                 </h3>

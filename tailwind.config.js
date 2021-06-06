@@ -7,6 +7,11 @@ module.exports = {
       body: ["Lato", "sans-serif"],
     },
     extend: {
+      gridTemplateRows: {
+        7: "repeat(7, minmax(0, 1fr))",
+        8: "repeat(8, minmax(0, 1fr))",
+        9: "repeat(9, minmax(0, 1fr))",
+      },
       lineClamp: {
         7: "7",
         8: "8",
