@@ -23,6 +23,7 @@ const Pagination = ({ page, onChangePage }) => {
     const currentMaxIndex = maxIndex;
     setMinIndex(currentMaxIndex + 1);
     setMaxIndex(pageLength * page);
+    // eslint-disable-next-line
   }, [page]);
 
   return (
