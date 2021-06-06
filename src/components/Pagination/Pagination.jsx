@@ -31,7 +31,7 @@ const Pagination = ({ page, onChangePage }) => {
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700 font-body">
-            {`Mostrando ${minIndex}-${maxIndex} de ${totalResults} resultados`}
+            {totalPages && `Página ${page} de ${totalPages}`}
           </p>
         </div>
         <div>

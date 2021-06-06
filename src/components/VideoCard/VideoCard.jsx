@@ -12,7 +12,7 @@ const VideoCard = ({ video = {} }) => {
   }, [video]);
 
   return (
-    <div className="w-full h-auto bg-opacity-40 bg-white rounded-lg p-2 flex items-center">
+    <div className="w-full h-auto bg-opacity-40 bg-black rounded-lg p-2 flex items-center">
       <iframe
         className="w-full h-auto my-auto"
         title={video.name}
