@@ -4,7 +4,7 @@ import Screen from "../../components/Screen";
 import client from "../../api";
 
 import Chip from "../../components/Chip";
-import VideoCard from "../../components/VideoCard/VideoCard";
+import VideoCard from "../../components/VideoCard";
 
 const MovieScreenContainer = ({ match }) => {
   const { id } = match.params;
