@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const VideoCard = ({ video = {} }) => {
   const [base, setBase] = useState("");
