@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 
-import useDebounce from "../../hooks/useDebounce";
-import { ReactComponent as SearchIcon } from "../../assets/search.svg";
-import { setMoviesList } from "../../redux/actions";
-import client from "../../api";
+import client from "api";
+
+import { ReactComponent as SearchIcon } from "assets/search.svg";
+
+import useDebounce from "hooks/useDebounce";
+import { setMoviesList } from "redux/actions";
 
 const Search = ({ ...attr }) => {
   const [consulta, setConsulta] = useState("");

@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import Search from "../Search";
+import Search from "components/Search";
 
-import { ReactComponent as ArrowLeftIcon } from "../../assets/arrow-left.svg";
+import { ReactComponent as ArrowLeftIcon } from "assets/arrow-left.svg";
 
 const Header = ({ name, arrowBack = false, ...attr }) => {
   const history = useHistory();

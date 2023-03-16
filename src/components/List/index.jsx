@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import Card from "../Card";
+import Card from "components/Card";
 
 const List = ({ ...attr }) => {
   const [lista, setLista] = useState([]);
