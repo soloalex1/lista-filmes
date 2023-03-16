@@ -1,4 +1,6 @@
+import React from "react";
 import { useHistory } from "react-router-dom";
+
 import Search from "../Search";
 
 import { ReactComponent as ArrowLeftIcon } from "../../assets/arrow-left.svg";
