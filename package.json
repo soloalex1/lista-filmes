@@ -1,6 +1,7 @@
 {
   "name": "lista-filmes",
   "version": "0.1.0",
+  "homepage": "https://soloalex1.github.io/lista-filmes",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
@@ -23,7 +24,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test --watch",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +48,10 @@
   },
   "devDependencies": {
     "autoprefixer": "9",
+    "gh-pages": "^5.0.0",
     "postcss": "7",
     "react-test-renderer": "^17.0.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "yarn-audit-fix": "^9.3.10"
   }
 }
