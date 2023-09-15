@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
 import useStore from "store";
 
 import client from "api";
