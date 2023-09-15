@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
+import useStore from "store";
 
 const Pagination = ({ page, onChangePage }) => {
-  const totalPages = useSelector((state) => state.moviesList?.total_pages);
+  const totalPages = useStore((state) => state.movieList?.total_pages);
 
   const nextPage = () => {
     const nextPage = page + 1;
