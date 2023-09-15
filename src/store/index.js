@@ -1,10 +1,12 @@
 import { create } from "zustand";
 
 const useStore = create((set) => ({
-  moviesList: {},
+  currentPage: 1,
+  movieList: {},
   movieInfo: {},
-  setMovieList: (moviesList) => set((state) => ({ ...state, moviesList })),
+  setMovieList: (movieList) => set((state) => ({ ...state, movieList })),
   setCurrentMovie: (movieInfo) => set((state) => ({ ...state, movieInfo })),
+  setPage: (page) => set((state) => ({ ...state, currentPage: page })),
 }));
 
 export default useStore;
