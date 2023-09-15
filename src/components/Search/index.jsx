@@ -72,13 +72,13 @@ const Search = ({ ...attr }) => {
 
   return (
     <div
-      class="inline-flex flex-col justify-center text-black w-full"
+      className="inline-flex flex-col justify-center text-black w-full"
       {...attr}
     >
-      <div class="relative w-full ">
+      <div className="relative w-full ">
         <input
           type="text"
-          class="w-full p-2 pl-10 rounded border border-gray-200 bg-opacity-40 bg-white backdrop-filter backdrop-blur-xl"
+          className="w-full p-2 pl-10 rounded border border-gray-200 bg-opacity-40 bg-white backdrop-filter backdrop-blur-xl"
           placeholder="Procure um filme..."
           value={consulta}
           onChange={handleChange}

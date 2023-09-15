@@ -26,7 +26,6 @@ const HomeScreenContainer = () => {
 
     // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
     if (history.location?.state?.from !== "/movie/:id") {
-      // console.log("from", history.location?.state?.from);
       client(`trending/movie/day?sort_by=popularity.desc&page=${page}&`)
         .then((data) => {
           dispatch(setMoviesList(data));
@@ -51,7 +50,7 @@ const HomeScreenContainer = () => {
   }, [page]);
 
   return (
-    <Screen title="Página Inicial" loading={loading}>
+    <Screen title="Página Inicial">
       <div className="container my-12 mx-auto px-4 md:px-12">
         {loading && <Loading />}
         <Pagination page={page} onChangePage={handlePageChange} />
