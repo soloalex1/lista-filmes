@@ -1,6 +1,16 @@
 import { create } from "zustand";
+import { Movie } from "types";
 
-const useStore = create((set) => ({
+interface MovieStore {
+  currentPage: number;
+  movieList: unknown;
+  movieInfo: Partial<Movie>;
+  setMovieList(movieList: unknown[]): void;
+  setCurrentMovie(movieInfo: Movie): void;
+  setPage(page: number): void;
+}
+
+const useStore = create<MovieStore>()((set) => ({
   currentPage: 1,
   movieList: {},
   movieInfo: {},

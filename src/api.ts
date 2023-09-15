@@ -1,7 +1,7 @@
 const KEY = "c391f33dc3ceb9d568d495ecc681876d";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-const client = async (endpoint) => {
+const client = async (endpoint: string): Promise<unknown> => {
   const options = {
     method: "GET",
   };
