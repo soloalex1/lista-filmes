@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
+import useStore from "store";
 
 import client from "api";
 
 import { ReactComponent as SearchIcon } from "assets/search.svg";
 
 import useDebounce from "hooks/useDebounce";
-import { setMoviesList } from "redux/actions";
 
 const Search = ({ ...attr }) => {
+  const { setMovieList } = useStore((state) => state);
+
   const [consulta, setConsulta] = useState("");
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -30,7 +31,7 @@ const Search = ({ ...attr }) => {
         // se a consulta estiver vazia, traz a pesquisa inicial
         client("trending/movie/day?sort_by=popularity.desc&page=1&")
           .then((data) => {
-            dispatch(setMoviesList(data));
+            setMovieList(data);
           })
           .catch((error) => {
             console.log(error);
@@ -39,7 +40,7 @@ const Search = ({ ...attr }) => {
         // se a consulta não estiver vazia, traz a pesquisa baseada na consulta
         client(`search/movie?query=${query}&`)
           .then((data) => {
-            dispatch(setMoviesList(data));
+            setMovieList(data);
           })
           .catch((error) => {
             console.log(error);
@@ -52,7 +53,7 @@ const Search = ({ ...attr }) => {
         // se a consulta não estiver vazia, faz a consulta normal
         client(`search/movie?query=${query}&`)
           .then((data) => {
-            dispatch(setMoviesList(data));
+            setMovieList(data);
           })
           .then(() => {
             // redireciona para a página inicial
