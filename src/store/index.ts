@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { Movie } from "types";
+import { Movie, MovieResults } from "types";
 
 interface MovieStore {
   currentPage: number;
-  movieList: unknown;
+  movieList: Partial<MovieResults>;
   movieInfo: Partial<Movie>;
-  setMovieList(movieList: unknown[]): void;
+  setMovieList(movieList: MovieResults): void;
   setCurrentMovie(movieInfo: Movie): void;
   setPage(page: number): void;
 }
