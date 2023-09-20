@@ -51,6 +51,7 @@ export type Credit = {
 };
 
 export type CastEntry = {
+  order: number;
   cast_id: string;
   character: string;
   credit_id: string;

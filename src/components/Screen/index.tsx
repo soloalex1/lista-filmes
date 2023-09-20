@@ -3,7 +3,7 @@ import React from "react";
 import Header from "components/Header";
 
 type ScreenProps = {
-  title: string;
+  title?: string;
   renderArrow: boolean;
   children: JSX.Element | JSX.Element[];
 };
