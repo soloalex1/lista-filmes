@@ -6,7 +6,7 @@ import List from "components/List";
 import Screen from "components/Screen";
 import Pagination from "components/Pagination";
 
-import client from "../../api.ts";
+import client from "api";
 
 const ROOT_URL = "trending/movie/day?sort_by=popularity.desc";
 
@@ -33,15 +33,13 @@ const HomeScreenContainer = () => {
 
   useEffect(() => {
     getResultsPerPage(currentPage);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [getResultsPerPage, currentPage]);
 
   return (
     <Screen title="Página Inicial">
       <div className="container my-12 mx-auto px-4 md:px-12">
         <Pagination page={currentPage} onChangePage={setPage} />
-        {movieList.results && <List items={movieList.results} />}
+        {movieList.results && <List movies={movieList.results} />}
       </div>
     </Screen>
   );
