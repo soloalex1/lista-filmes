@@ -1,19 +1,21 @@
-import React from "react";
-
 import useStore from "store";
 
-const Pagination = ({ page, onChangePage }) => {
+type PaginationProps = {
+  page: number;
+  onChangePage(page: number): void;
+};
+
+const Pagination = ({ page, onChangePage }: PaginationProps) => {
   const totalPages = useStore((state) => state.movieList?.total_pages);
 
   const nextPage = () => {
-    const nextPage = page + 1;
-    onChangePage(nextPage);
+    onChangePage(page + 1);
   };
 
   const prevPage = () => {
-    const prevPage = page - 1;
-    onChangePage(prevPage);
+    onChangePage(page - 1);
   };
+
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
