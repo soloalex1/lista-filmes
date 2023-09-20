@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { VideoEntry } from "types";
 
-const VideoCard = ({ video = {} }) => {
+type VideoCardProps = {
+  video: Partial<VideoEntry>;
+};
+
+const VideoCard = ({ video = {} }: VideoCardProps) => {
   const [base, setBase] = useState("");
 
   useEffect(() => {
     if (video.site === "YouTube") {
       setBase("https://www.youtube.com/embed/");
-    } else if (video.site === "Vimeo") {
+      return;
+    }
+
+    if (video.site === "Vimeo") {
       setBase("https://vimeo.com/");
+      return;
     }
   }, [video]);
 
@@ -17,8 +26,7 @@ const VideoCard = ({ video = {} }) => {
         className="w-full h-auto my-auto"
         title={video.name}
         src={`${base}${video.key}`}
-        frameborder="0"
-        allowfullscreen
+        allowFullScreen
       />
     </div>
   );

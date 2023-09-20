@@ -14,8 +14,11 @@ const useStore = create<MovieStore>()((set) => ({
   currentPage: 1,
   movieList: {},
   movieInfo: {},
+
   setMovieList: (movieList) => set((state) => ({ ...state, movieList })),
+
   setCurrentMovie: (movieInfo) => set((state) => ({ ...state, movieInfo })),
+
   setPage: (page) => set((state) => ({ ...state, currentPage: page })),
 }));
 
