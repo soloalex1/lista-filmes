@@ -62,46 +62,6 @@ const Search = () => {
     }
   };
 
-  // if (currentPath === "/") {
-  //   // se estiver na página inicial e não tiver sido redirecionado
-  //   if (query === "" && previousPath !== "/movie/:id") {
-  //     // se a consulta estiver vazia, traz a pesquisa inicial
-  //     client("trending/movie/day?sort_by=popularity.desc&page=1&")
-  //       .then((data) => {
-  //         setMovieList(data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } else {
-  //     // se a consulta não estiver vazia, traz a pesquisa baseada na consulta
-  //     client(`search/movie?query=${query}&`)
-  //       .then((data) => {
-  //         setMovieList(data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // } else {
-  //   // se estiver na página de filme
-  //   if (query.trim().length !== 0) {
-  //     console.log("consulta não tá vazia");
-  //     // se a consulta não estiver vazia, faz a consulta normal
-  //     client(`search/movie?query=${query}&`)
-  //       .then((data) => {
-  //         setMovieList(data);
-  //       })
-  //       .then(() => {
-  //         // redireciona para a página inicial
-  //         history.push("/", { from: "/movie/:id" });
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }
-
   useEffect(() => {
     movieSearch(debounceQuery);
   }, [movieSearch, debounceQuery]);
