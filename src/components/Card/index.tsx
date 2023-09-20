@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Movie } from "types";
 
-const Card = ({ movie, ...otherProps }) => {
+type CardProps = {
+  movie: Movie;
+};
+
+const Card = ({ movie }: CardProps) => {
   const { id, title, release_date, backdrop_path } = movie;
 
   const backgroundURL = `url(https://image.tmdb.org/t/p/original/${backdrop_path})`;
@@ -10,7 +15,6 @@ const Card = ({ movie, ...otherProps }) => {
     <Link
       to={`/movie/${id}`}
       className="block w-full shadow-lg overflow-hidden rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
-      {...otherProps}
     >
       <div className="relative h-full min-h-full w-full flex items-end bg-blend-multiply z-20 rounded-lg bg-gradient-to-r from-gray-900 to-transparent py-4 px-2">
         <div className="p-6">
