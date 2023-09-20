@@ -6,7 +6,7 @@ import List from "components/List";
 import Screen from "components/Screen";
 import Pagination from "components/Pagination";
 
-import client from "../../api";
+import client from "../../api.ts";
 
 const ROOT_URL = "trending/movie/day?sort_by=popularity.desc";
 
