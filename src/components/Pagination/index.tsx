@@ -1,3 +1,5 @@
+import React from "react";
+
 import useStore from "store";
 
 type PaginationProps = {
