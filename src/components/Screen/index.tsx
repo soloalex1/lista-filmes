@@ -4,7 +4,7 @@ import Header from "components/Header";
 
 type ScreenProps = {
   title?: string;
-  renderArrow: boolean;
+  renderArrow?: boolean;
   children: JSX.Element | JSX.Element[];
 };
 
