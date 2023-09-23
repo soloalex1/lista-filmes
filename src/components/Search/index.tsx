@@ -2,7 +2,7 @@ import React, { useEffect, useState, ChangeEvent } from "react";
 import { useHistory } from "react-router";
 
 import useStore from "store";
-import client from "api";
+import { fetchMovieList } from "api";
 
 import useDebounce from "hooks/useDebounce";
 
@@ -35,7 +35,7 @@ const Search = () => {
           ? "trending/movie/day?sort_by=popularity.desc&page=1&"
           : `search/movie?query=${query}&`;
 
-      await client(mountedURL)
+      await fetchMovieList(mountedURL)
         .then((data) => {
           setMovieList(data);
         })
@@ -47,7 +47,7 @@ const Search = () => {
     }
 
     if (query.trim().length !== 0) {
-      client(`search/movie?query=${query}&`)
+      fetchMovieList(`search/movie?query=${query}&`)
         .then((data) => {
           setMovieList(data);
         })

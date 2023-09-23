@@ -6,7 +6,7 @@ import List from "components/List";
 import Screen from "components/Screen";
 import Pagination from "components/Pagination";
 
-import client from "api";
+import { fetchMovieList } from "api";
 
 const ROOT_URL = "trending/movie/day?sort_by=popularity.desc";
 
@@ -20,7 +20,7 @@ const HomeScreenContainer = () => {
   const getResultsPerPage = (page = 1) => {
     // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
     if (history.location?.state?.from !== "/movie/:id") {
-      client(`${ROOT_URL}&page=${page}&`).then((data) => {
+      fetchMovieList(`${ROOT_URL}&page=${page}&`).then((data) => {
         setMovieList(data);
       });
     } else {

@@ -1,9 +1,11 @@
 const KEY = "c391f33dc3ceb9d568d495ecc681876d";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-import { MovieResults } from "types";
+import { Movie, MovieResults } from "types";
 
-const client = async (endpoint: string): Promise<MovieResults> => {
+export const fetchMovieList = async (
+  endpoint: string
+): Promise<MovieResults> => {
   const options = {
     method: "GET",
   };
@@ -21,4 +23,20 @@ const client = async (endpoint: string): Promise<MovieResults> => {
   }
 };
 
-export default client;
+export const fetchMovieDetails = async (id: string): Promise<Movie> => {
+  const options = {
+    method: "GET",
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/movie/${id}?append_to_response=videos,credits&api_key=${KEY}&language=pt-BR`,
+    options
+  );
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const errorMessage = await response.text();
+    return Promise.reject(new Error(errorMessage));
+  }
+};
