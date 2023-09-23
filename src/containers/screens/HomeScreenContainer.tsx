@@ -15,7 +15,7 @@ const HomeScreenContainer = () => {
     (state) => state
   );
 
-  const history = useHistory();
+  const history = useHistory<{ from?: string }>();
 
   const getResultsPerPage = (page = 1) => {
     // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
