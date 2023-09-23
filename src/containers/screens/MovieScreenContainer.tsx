@@ -124,21 +124,18 @@ const MovieScreenContainer = ({
               </div>
             </div>
           </div>
-          {movie &&
-            movie.videos &&
-            movie.videos.results &&
-            movie.videos.results.length > 0 && (
-              <div className="col-span-4 md:col-span-2 row-span-2 md:col-start-4 row-start-5 py-2 px-4 flex flex-col justify-end ">
-                <h3 className="font-title font-bold text-md md:text-xl mb-2">
-                  Vídeos Relacionados
-                </h3>
-                <div className="w-full h-auto grid gap-2 grid-cols-2 grid-rows-auto place-content-end">
-                  {movie?.videos?.results.map((video) => (
-                    <VideoCard video={video} />
-                  ))}
-                </div>
+          {movie && (
+            <div className="col-span-4 md:col-span-2 row-span-2 md:col-start-4 row-start-5 py-2 px-4 flex flex-col justify-end ">
+              <h3 className="font-title font-bold text-md md:text-xl mb-2">
+                Vídeos Relacionados
+              </h3>
+              <div className="w-full h-auto grid gap-2 grid-cols-2 grid-rows-auto place-content-end">
+                {movie?.videos?.results.map((video) => (
+                  <VideoCard video={video} />
+                ))}
               </div>
-            )}
+            </div>
+          )}
         </div>
       </section>
     </Screen>
