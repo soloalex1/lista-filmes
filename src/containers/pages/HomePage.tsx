@@ -11,7 +11,7 @@ import { fetchMovieList } from "@/api";
 
 const ROOT_URL = "trending/movie/day?sort_by=popularity.desc";
 
-const HomeScreenContainer = () => {
+const HomePage = () => {
   const { currentPage, setPage, movieList, setMovieList } = useStore(
     (state) => state
   );
@@ -49,4 +49,4 @@ const HomeScreenContainer = () => {
   );
 };
 
-export default HomeScreenContainer;
+export default HomePage;
