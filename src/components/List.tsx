@@ -1,6 +1,6 @@
-import Card from "components/Card";
+import Card from "@/components/Card";
 
-import { Movie } from "types";
+import { Movie } from "@/types";
 
 type ListProps = {
   movies: Movie[];
