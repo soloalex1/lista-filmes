@@ -1,8 +1,12 @@
 {
   "name": "lista-filmes",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "private": false,
   "type": "module",
+  "author": "Alexandre Machado <amch.smd@gmail.com>",
+  "main": "index.tsx",
+  "repository": "https://github.com/soloalex1/lista-filmes.git",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,8 +14,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
