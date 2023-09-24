@@ -1,7 +1,9 @@
 import { useEffect, useState, ChangeEvent, useCallback } from "react";
 import { useHistory } from "react-router";
 
-import { ReactComponent as SearchIcon } from "@/assets/search.svg";
+// import { ReactComponent as SearchIcon } from "@/assets/search.svg";
+
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 import useDebounce from "@/hooks/useDebounce";
 
@@ -80,7 +82,7 @@ const Search = () => {
           value={queryString}
           onChange={handleChange}
         />
-        <SearchIcon className="w-4 h-4 absolute left-2.5 top-3.5 fill-current" />
+        <MagnifyingGlassIcon className="w-4 h-4 absolute left-2.5 top-3.5 fill-current" />
       </div>
     </div>
   );

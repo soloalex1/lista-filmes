@@ -1,8 +1,7 @@
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { useHistory } from "react-router-dom";
 
 import Search from "@/components/Search";
-
-import { ReactComponent as ArrowLeftIcon } from "@/assets/arrow-left.svg";
 
 type HeaderProps = {
   name?: string;
