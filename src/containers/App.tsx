@@ -1,19 +1,22 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import HomePage from "@/containers/pages/HomePage";
-import MoviePage from "@/containers/pages/MoviePage";
+// import MoviePage from "@/containers/pages/MoviePage";
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/movie/:id" component={MoviePage} />
-      </Switch>
-    </BrowserRouter>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+    // children: [
+    //   {
+    //     path: "movie/:id",
+    //     element: <MoviePage />,
+    //   },
+    // ],
+  },
+]);
+
+const App = () => <RouterProvider router={router} />;
 
 export default App;
 
