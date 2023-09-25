@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Movie, MovieResults } from "types";
+import { Movie, MovieResults } from "@/types";
 
 interface MovieStore {
   currentPage: number;

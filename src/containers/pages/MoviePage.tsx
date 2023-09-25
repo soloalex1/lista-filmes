@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import Chip from "components/Chip";
-import Screen from "components/Screen";
-import VideoCard from "components/VideoCard";
+import Chip from "@/components/Chip";
+import Screen from "@/components/Screen";
+import VideoCard from "@/components/VideoCard";
 
-import { fetchMovieDetails } from "api";
+import { fetchMovieDetails } from "@/api";
 
-import { CastEntry, Movie } from "types";
+import { CastEntry, Movie } from "@/types";
 
 type MovieScreenProps = {
   match: {
@@ -16,7 +16,7 @@ type MovieScreenProps = {
   };
 };
 
-const MovieScreenContainer = ({
+const MoviePage = ({
   match: {
     params: { id },
   },
@@ -29,7 +29,7 @@ const MovieScreenContainer = ({
     fetchMovieDetails(id).then((data) => {
       setMovie(data);
     });
-  }, [fetchMovieDetails]);
+  }, [id]);
 
   useEffect(() => {
     if (movie) {
@@ -142,4 +142,4 @@ const MovieScreenContainer = ({
   );
 };
 
-export default MovieScreenContainer;
+export default MoviePage;

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { VideoEntry } from "types";
+import { useEffect, useState } from "react";
+import { VideoEntry } from "@/types";
 
 type VideoCardProps = {
   video: Partial<VideoEntry>;

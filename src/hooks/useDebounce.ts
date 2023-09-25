@@ -9,8 +9,7 @@ const useDebounce = (value: string, timeout: number = 1000) => {
     }, timeout);
 
     return () => clearTimeout(handler);
-    // eslint-disable-next-line
-  }, [value]);
+  }, [timeout, value]);
 
   return debounceValue;
 };

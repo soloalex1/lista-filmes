@@ -1,5 +1,7 @@
-module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+/** @type {import('tailwindcss').Config} */
+
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media",
   theme: {
     fontFamily: {
@@ -24,5 +26,6 @@ module.exports = {
       opacity: ["disabled"],
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: ["@tailwindcss/line-clamp"],
 };
+

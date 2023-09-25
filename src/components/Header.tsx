@@ -1,16 +1,14 @@
-import React from "react";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { useHistory } from "react-router-dom";
 
-import Search from "components/Search";
-
-import { ReactComponent as ArrowLeftIcon } from "assets/arrow-left.svg";
+import Search from "@/components/Search";
 
 type HeaderProps = {
-  name: string;
+  name?: string;
   renderArrow: boolean;
 };
 
-const Header = ({ name, renderArrow = false }: HeaderProps) => {
+const Header = ({ renderArrow = false }: HeaderProps) => {
   const history = useHistory();
 
   const goBack = () => {
