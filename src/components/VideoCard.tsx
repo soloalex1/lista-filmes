@@ -23,6 +23,7 @@ const VideoCard = ({ video = {} }: VideoCardProps) => {
   return (
     <div className="w-full h-auto bg-opacity-40 bg-black rounded-lg p-2 flex items-center">
       <iframe
+        loading="lazy"
         className="w-full h-auto my-auto"
         title={video.name}
         src={`${base}${video.key}`}

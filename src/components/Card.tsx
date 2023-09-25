@@ -8,7 +8,7 @@ type CardProps = {
 const Card = ({ movie }: CardProps) => {
   const { id, title, release_date, backdrop_path } = movie;
 
-  const backgroundURL = `url(https://image.tmdb.org/t/p/original/${backdrop_path})`;
+  const backgroundURL = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
 
   return (
     <Link
@@ -25,9 +25,10 @@ const Card = ({ movie }: CardProps) => {
           </h1>
         </div>
       </div>
-      <div
+      <img
+        src={backgroundURL}
         className="absolute top-0 right-0 z-10 w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: backgroundURL }}
+        loading="lazy"
       />
     </Link>
   );
