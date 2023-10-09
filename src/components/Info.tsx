@@ -9,7 +9,7 @@ type InfoProps = {
 const Info = ({ movie, cast }: InfoProps) => {
   return (
     <div
-      className="col-span-4 md:col-span-3 row-span-2 md:row-span-3 row-start-3 md:row-start-5 grid grid-cols-1 md:grid-cols-2 grid-rows-4 md:grid-rows-2
+      className="col-span-4 md:col-span-3 row-span-2 md:row-span-3 row-start-3 md:row-start-6 grid grid-cols-1 md:grid-cols-2 grid-rows-4 md:grid-rows-2
            gap-2 md:gap-6 rounded-br-3xl rounded-tr-3xl md:rounded-br-none md:rounded-tr-3xl bg-opacity-40 bg-black backdrop-filter backdrop-blur-xl
            text-gray-300 text-shadow shadow-md px-4 md:px-8 py-4"
     >
