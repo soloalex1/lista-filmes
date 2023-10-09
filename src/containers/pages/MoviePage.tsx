@@ -68,7 +68,7 @@ const MoviePage = ({
           {/* informações do filme */}
           <div className="col-span-4 row-span-2 md:row-start-2 bg-opacity-80 flex justify-start items-center px-4 md:px-8">
             <div className="">
-              <h1 className="font-title font-bold text-2xl md:text-5xl flex-grow  justify-self-end leading-normal">
+              <h1 className="font-title font-bold text-2xl md:text-5xl flex-grow mb-2 justify-self-end leading-normal">
                 {movie?.title}
               </h1>
               {/* todo: flexbox do título e tagline */}
