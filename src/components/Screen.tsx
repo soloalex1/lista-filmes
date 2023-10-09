@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import React from "react";
 
 type ScreenProps = {
   title?: string;
@@ -6,7 +7,11 @@ type ScreenProps = {
   children: JSX.Element | JSX.Element[];
 };
 
-const Screen = ({ title = "", children, renderArrow = false }: ScreenProps) => {
+const Screen: React.FC<ScreenProps> = ({
+  title = "",
+  children,
+  renderArrow = false,
+}: ScreenProps) => {
   return (
     <>
       <Header name={title} renderArrow={renderArrow} />
