@@ -15,11 +15,11 @@ const useStore = create<MovieStore>()((set) => ({
   movieList: {},
   movieInfo: {},
 
-  setMovieList: (movieList) => set((state) => ({ ...state, movieList })),
+  setMovieList: (movieList) => set(() => ({ movieList })),
 
-  setCurrentMovie: (movieInfo) => set((state) => ({ ...state, movieInfo })),
+  setCurrentMovie: (movieInfo) => set(() => ({ movieInfo })),
 
-  setPage: (page) => set((state) => ({ ...state, currentPage: page })),
+  setPage: (page) => set(() => ({ currentPage: page })),
 }));
 
 export default useStore;
