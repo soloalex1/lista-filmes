@@ -1,13 +1,14 @@
-const KEY = "c391f33dc3ceb9d568d495ecc681876d";
-const BASE_URL = "https://api.themoviedb.org/3";
+const KEY = import.meta.env.VITE_API_KEY;
 
-import { Movie, MovieResults } from "@/types";
+const BASE_URL = 'https://api.themoviedb.org/3';
+
+import { Movie, MovieResults } from '@/types';
 
 export const fetchMovieList = async (
   endpoint: string
 ): Promise<MovieResults> => {
   const options = {
-    method: "GET",
+    method: 'GET',
   };
 
   const response = await fetch(
@@ -25,7 +26,7 @@ export const fetchMovieList = async (
 
 export const fetchMovieDetails = async (id: string): Promise<Movie> => {
   const options = {
-    method: "GET",
+    method: 'GET',
   };
 
   const response = await fetch(
