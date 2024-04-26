@@ -1,15 +1,15 @@
-import { useCallback, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import List from "@/components/List";
-import Screen from "@/components/Screen";
-import Pagination from "@/components/Pagination";
+import List from '@/components/List';
+import Screen from '@/components/Screen';
+import Pagination from '@/components/Pagination';
 
-import useStore from "@/store";
+import useStore from '@/store';
 
-import { fetchMovieList } from "@/api";
+import { fetchMovieList } from '@/api';
 
-const ROOT_URL = "trending/movie/day?sort_by=popularity.desc";
+import { ROOT_SEARCH } from '../../constants';
 
 const HomePage = () => {
   const { currentPage, setPage, movieList, setMovieList } = useStore(
@@ -21,8 +21,8 @@ const HomePage = () => {
   const getResultsPerPage = useCallback(
     (page = 1) => {
       // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
-      if (history.location?.state?.from !== "/movie/:id") {
-        fetchMovieList(`${ROOT_URL}&page=${page}&`).then((data) => {
+      if (history.location?.state?.from !== '/movie/:id') {
+        fetchMovieList(`${ROOT_SEARCH}&page=${page}&`).then((data) => {
           setMovieList(data);
         });
       } else {

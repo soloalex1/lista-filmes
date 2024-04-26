@@ -1,7 +1,7 @@
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-import { useHistory } from "react-router-dom";
+import { ArrowLeftIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { useHistory } from 'react-router-dom';
 
-import Search from "@/components/Search";
+import Button from './Button';
 
 type HeaderProps = {
   name?: string;
@@ -16,17 +16,23 @@ const Header = ({ renderArrow = false }: HeaderProps) => {
   };
 
   return (
-    <header className="bg-transparent sticky z-30 h-20 md:h-24 md:py-2 px-4 w-full">
-      <nav className="h-full flex justify-between items-center md:pl-4">
+    <header className="bg-white border-black border-solid border-4 border-x-0 h-24 w-full">
+      <nav className="h-full flex justify-between flex-row-reverse">
+        <Button
+          title="Pesquisar"
+          onClick={() => {}}
+          icon={
+            <MagnifyingGlassIcon className="fill-white stroke-white h-8 w-8" />
+          }
+        />
+
         {renderArrow && (
-          <button
-            className="text-shadow text-black bg-gray-200 bg-opacity-50 rounded-full h-10 w-10 p-2 mr-4 md:mr-8"
+          <Button
+            title="Voltar"
             onClick={goBack}
-          >
-            <ArrowLeftIcon className="fill-current h-full w-full" />
-          </button>
+            icon={<ArrowLeftIcon className="fill-white stroke-white h-8 w-8" />}
+          />
         )}
-        <Search />
       </nav>
     </header>
   );

@@ -1,5 +1,6 @@
-import Header from "@/components/Header";
-import React from "react";
+import React from 'react';
+
+import Header from '@/components/Header';
 
 type ScreenProps = {
   title?: string;
@@ -8,14 +9,16 @@ type ScreenProps = {
 };
 
 const Screen: React.FC<ScreenProps> = ({
-  title = "",
+  title = '',
   children,
   renderArrow = false,
 }: ScreenProps) => {
   return (
     <>
       <Header name={title} renderArrow={renderArrow} />
-      <main className="w-full h-full mt-2">{children}</main>
+      <main className="w-full h-full mt-2 grid grid-cols-main">
+        <div className="col-start-2">{children}</div>
+      </main>
     </>
   );
 };
