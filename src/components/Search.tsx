@@ -7,11 +7,14 @@ import useStore from '@/store';
 
 import { fetchMovieList } from '@/api';
 
+type SearchProps = {
+  show: boolean;
+};
 interface PathnameState {
   from?: string;
 }
 
-const Search = () => {
+const Search = ({ show }: SearchProps) => {
   const history = useHistory<PathnameState>();
 
   const [queryString, setQueryString] = useState('');
@@ -20,9 +23,9 @@ const Search = () => {
 
   const debounceQuery = useDebounce(queryString);
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setQueryString(e.target.value);
-  // };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setQueryString(e.target.value);
+  };
 
   const movieSearch = useCallback(
     async (query: string) => {
@@ -69,17 +72,18 @@ const Search = () => {
   }, [movieSearch, debounceQuery]);
 
   return (
-    <div className="inline-flex flex-col justify-center text-black w-full">
-      <div className="relative h-full w-full">
-        {/* <input
-          type="text"
-          className="w-full p-2 pl-10  border-black border-2 bg-white backdrop-filter backdrop-blur-xl"
-          placeholder="Procure um filme..."
-          value={queryString}
-          onChange={handleChange}
-        />
-        <MagnifyingGlassIcon className="w-4 h-4 absolute left-2.5 top-3.5 fill-current" /> */}
-      </div>
+    <div
+      className={`text-white transition-all duration-500 ${
+        show ? 'w-full' : 'w-0'
+      }`}
+    >
+      <input
+        type="text"
+        className="w-full h-full p-0 pl-4 md:pl-10 text-xl md:text-4xl uppercase font-black border-black border-x-2 bg-black float-right"
+        placeholder="Procure um filme..."
+        value={queryString}
+        onChange={handleChange}
+      />
     </div>
   );
 };
