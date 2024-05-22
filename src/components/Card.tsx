@@ -1,36 +1,37 @@
-import { Link } from "react-router-dom";
-import { Movie } from "types";
+import { Link } from 'react-router-dom';
+import { Movie } from 'types';
 
 type CardProps = {
   movie: Movie;
 };
 
 const Card = ({ movie }: CardProps) => {
-  const { id, title, release_date, backdrop_path } = movie;
+  const { id, title, release_date, poster_path } = movie;
 
-  const backgroundURL = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
+  const backgroundURL = `https://image.tmdb.org/t/p/original/${poster_path}`;
 
   return (
-    <Link
-      to={`/movie/${id}`}
-      className="block w-full shadow-lg overflow-hidden rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
-    >
-      <div className="relative h-full min-h-full w-full flex items-end bg-blend-multiply z-20 rounded-lg bg-gradient-to-r from-gray-900 to-transparent py-4 px-2">
-        <div className="p-6">
-          <h4 className="text-gray-300">
-            {new Date(release_date).getFullYear()}
-          </h4>
-          <h1 className="font-title text-3xl font-bold text-gray-300">
-            {title}
-          </h1>
-        </div>
-      </div>
+    <div className="relative group overflow-hidden rounded-lg">
+      <Link to={`/movie/${id}`} className="absolute inset-0 z-10">
+        <span className="sr-only">Ver filme</span>
+      </Link>
       <img
+        alt={`Pôster do filme ${title}`}
+        className="h-[450px] w-full object-cover transition-opacity duration-300 group-hover:opacity-80"
+        height={450}
         src={backgroundURL}
-        className="absolute top-0 right-0 z-10 w-full h-full bg-cover bg-center"
         loading="lazy"
+        style={{
+          aspectRatio: '300/450',
+          objectFit: 'cover',
+        }}
+        width={300}
       />
-    </Link>
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white transition-all duration-300 hidden group-hover:block">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="text-sm">{new Date(release_date).getFullYear()}</p>
+      </div>
+    </div>
   );
 };
 
