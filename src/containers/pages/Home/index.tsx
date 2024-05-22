@@ -40,11 +40,11 @@ const HomePage = () => {
   }, [getResultsPerPage, currentPage]);
 
   return (
-    <Screen title="Página Inicial">
-      <div className="container my-12 mx-auto px-4 md:px-12">
-        <Pagination page={currentPage} onChangePage={setPage} />
+    <Screen>
+      <>
         {movieList.results && <List movies={movieList.results} />}
-      </div>
+        <Pagination page={currentPage} onChangePage={setPage} />
+      </>
     </Screen>
   );
 };
