@@ -9,7 +9,7 @@ import useStore from '@/store';
 
 import { fetchMovieList } from '@/api';
 
-import { ROOT_SEARCH } from '../../constants';
+import { ROOT_SEARCH } from '../../../constants';
 
 const HomePage = () => {
   const { currentPage, setPage, movieList, setMovieList } = useStore(
