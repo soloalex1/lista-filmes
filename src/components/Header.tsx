@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import Button from './Button';
 import Search from './Search';
+import Filters from './Filters';
 
 type HeaderProps = {
   name?: string;
@@ -25,24 +26,28 @@ const Header = ({ renderArrow = false }: HeaderProps) => {
 
   return (
     <header className="bg-white border-black border-solid border-4 border-x-0 h-24 w-full">
+      <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-4xl">
+        Movie library
+      </h1>
       <nav className="h-full flex justify-between flex-row">
-        <Button
+        <Filters />
+        {/* <Button
           title="Pesquisar"
           onClick={toggleSearch}
           icon={
             <MagnifyingGlassIcon className="fill-white stroke-white h-8 w-8" />
           }
-        />
+        /> */}
 
-        <Search show={showSearch} />
-
+        {/* <Search show={showSearch} /> */}
+        {/*
         {renderArrow && (
           <Button
             title="Voltar"
             onClick={goBack}
             icon={<ArrowLeftIcon className="fill-white stroke-white h-8 w-8" />}
           />
-        )}
+        )} */}
       </nav>
     </header>
   );

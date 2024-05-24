@@ -22,7 +22,7 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        main: '1fr min(160ch, 100%) 1fr',
+        main: '1fr min(140ch, 100%) 1fr',
       },
       lineClamp: {
         7: '7',

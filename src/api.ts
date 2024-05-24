@@ -2,7 +2,20 @@ const KEY = import.meta.env.VITE_API_KEY;
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-import { Movie, MovieResults } from '@/types';
+import { GenreQuery, Movie, MovieResults } from '@/types';
+
+export const fetchGenreList = async (): Promise<GenreQuery> => {
+  const response = await fetch(
+    `${BASE_URL}/genre/movie/list?language=pt-BR&api_key=${KEY}`
+  );
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const errorMessage = await response.text();
+    return Promise.reject(new Error(errorMessage));
+  }
+};
 
 export const fetchMovieList = async (
   endpoint: string
