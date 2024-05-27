@@ -5,14 +5,13 @@ import GenreFilter from './Genre';
 
 import useStore from '@/store';
 import { FilterType } from '@/types';
-import { fetchGenreList } from '@/api';
 
 const Filters = () => {
   const {
     meta: { genres },
     filters,
-    setGenres,
     setFilters,
+    fetchGenreList,
   } = useStore((state) => state);
 
   const { handleSubmit, control } = useForm<FilterType>({
@@ -26,8 +25,8 @@ const Filters = () => {
   };
 
   useEffect(() => {
-    fetchGenreList().then((data) => setGenres(data.genres));
-  }, [setGenres]);
+    fetchGenreList();
+  }, [fetchGenreList]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

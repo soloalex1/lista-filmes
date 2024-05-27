@@ -1,5 +1,8 @@
 import { create } from 'zustand';
-import { FilterType, Genre, Movie, MovieResults } from '@/types';
+
+import * as api from '@/api';
+
+import { FilterType, Genre, GenreQuery, Movie, MovieResults } from '@/types';
 
 interface MovieStore {
   currentPage: number;
@@ -12,7 +15,7 @@ interface MovieStore {
   setMovieList(movieList: MovieResults): void;
   setCurrentMovie(movieInfo: Movie): void;
   setPage(page: number): void;
-  setGenres(genres: Genre[]): void;
+  fetchGenreList(): void;
   setFilters(filters: FilterType): void;
 }
 
@@ -34,7 +37,11 @@ const useStore = create<MovieStore>()((set) => ({
 
   setPage: (page) => set(() => ({ currentPage: page })),
 
-  setGenres: (genres) => set((state) => ({ meta: { ...state.meta, genres } })),
+  fetchGenreList: async () => {
+    const data = await api.get<GenreQuery>(`/genre/movie/list`);
+
+    set((state) => ({ meta: { ...state.meta, genres: data.genres } }));
+  },
 
   setFilters: (filters) => set(() => ({ filters })),
 }));
