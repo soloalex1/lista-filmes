@@ -4,21 +4,23 @@ export const BASE_URL = 'https://api.themoviedb.org/3';
 
 import { Movie, MovieResults } from '@/types';
 
-export const get = async <T>(
-  path: string,
-  params?: Record<string, string>
-): Promise<T> => {
-  const query = new URLSearchParams({ ...params, api_key: KEY }).toString();
+export const get = async <T>(path: string, params?: unknown): Promise<T> => {
+  const query = new URLSearchParams({
+    ...params!,
+    api_key: KEY,
+    language: 'pt-BR',
+  }).toString();
 
-  return fetch(`${BASE_URL}${path}?${query}`, { method: 'GET' })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
+  const response = await fetch(`${BASE_URL}${path}?${query}`, {
+    method: 'GET',
+  });
 
-      return response.json() as Promise<{ data: T }>;
-    })
-    .then((data) => data.data);
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const data = await (response.json() as Promise<T>);
+
+  return data;
 };
 
 export const fetchMovieList = async (

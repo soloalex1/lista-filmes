@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 import * as api from '@/api';
 
@@ -16,34 +17,51 @@ interface MovieStore {
   setCurrentMovie(movieInfo: Movie): void;
   setPage(page: number): void;
   fetchGenreList(): void;
+  fetchMovieList(): void;
   setFilters(filters: FilterType): void;
 }
 
-const useStore = create<MovieStore>()((set) => ({
-  currentPage: 1,
-  movieList: {},
-  movieInfo: {},
-  filters: {
-    search: '',
-    genre: 0,
-  },
-  meta: {
-    genres: [],
-  },
+const useStore = create<MovieStore>()(
+  devtools((set, get) => ({
+    currentPage: 1,
+    movieList: {},
+    movieInfo: {},
+    filters: {
+      search: '',
+      genre: 0,
+    },
+    meta: {
+      genres: [],
+    },
 
-  setMovieList: (movieList) => set(() => ({ movieList })),
+    setMovieList: (movieList) =>
+      set(() => ({ movieList }), false, 'setMovieList'),
 
-  setCurrentMovie: (movieInfo) => set(() => ({ movieInfo })),
+    setCurrentMovie: (movieInfo) => set(() => ({ movieInfo })),
 
-  setPage: (page) => set(() => ({ currentPage: page })),
+    setPage: (page) => set(() => ({ currentPage: page })),
 
-  fetchGenreList: async () => {
-    const data = await api.get<GenreQuery>(`/genre/movie/list`);
+    fetchGenreList: async () => {
+      const { genres } = await api.get<GenreQuery>(`/genre/movie/list`);
 
-    set((state) => ({ meta: { ...state.meta, genres: data.genres } }));
-  },
+      set(
+        (state) => ({ meta: { ...state.meta, genres } }),
+        false,
+        'fetchGenreList'
+      );
+    },
 
-  setFilters: (filters) => set(() => ({ filters })),
-}));
+    fetchMovieList: async () => {
+      const data = await api.get<MovieResults>('/trending/movie/day', {
+        ...get().filters,
+        sort_by: 'popularity.desc',
+      });
+
+      set(() => ({ movieList: data }), false, 'fetchMovieList');
+    },
+
+    setFilters: (filters) => set(() => ({ filters })),
+  }))
+);
 
 export default useStore;

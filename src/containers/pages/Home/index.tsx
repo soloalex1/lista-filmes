@@ -7,12 +7,8 @@ import Pagination from '@/components/Pagination';
 
 import useStore from '@/store';
 
-import { fetchMovieList } from '@/api';
-
-import { ROOT_SEARCH } from '../../../constants';
-
 const HomePage = () => {
-  const { currentPage, setPage, movieList, setMovieList } = useStore(
+  const { currentPage, setPage, movieList, fetchMovieList } = useStore(
     (state) => state
   );
 
@@ -22,9 +18,8 @@ const HomePage = () => {
     (page = 1) => {
       // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
       if (history.location?.state?.from !== '/movie/:id') {
-        fetchMovieList(`${ROOT_SEARCH}&page=${page}&`).then((data) => {
-          setMovieList(data);
-        });
+        setPage(page);
+        fetchMovieList();
       } else {
         // senão, apaga o from
         const state = { ...history.location.state };
@@ -32,7 +27,7 @@ const HomePage = () => {
         history.replace({ ...history.location, state });
       }
     },
-    [history, setMovieList]
+    [history, setPage, fetchMovieList]
   );
 
   useEffect(() => {
