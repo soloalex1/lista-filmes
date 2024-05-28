@@ -68,7 +68,7 @@ export type CrewEntry = {
 } & Credit;
 
 export type FilterType = {
-  search?: string;
+  query?: string;
   genre?: number;
   year?: number;
 };

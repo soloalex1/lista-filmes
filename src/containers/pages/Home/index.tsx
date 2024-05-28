@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import List from '@/components/List';
 import Screen from '@/components/Screen';
 import Pagination from '@/components/Pagination';
+import Filters from '@/components/Filters';
 
 import useStore from '@/store';
 
@@ -19,7 +20,7 @@ const HomePage = () => {
       // só faz a consulta completa se eu não tiver sido redirecionado da tela de filme
       if (history.location?.state?.from !== '/movie/:id') {
         setPage(page);
-        fetchMovieList();
+        fetchMovieList('/trending/movie/day');
       } else {
         // senão, apaga o from
         const state = { ...history.location.state };
@@ -37,7 +38,8 @@ const HomePage = () => {
   return (
     <Screen>
       <>
-        {movieList.results && <List movies={movieList.results} />}
+        <Filters />
+        <List movies={movieList.results!} />
         <Pagination page={currentPage} onChangePage={setPage} />
       </>
     </Screen>

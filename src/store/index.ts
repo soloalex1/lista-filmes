@@ -3,31 +3,16 @@ import { devtools } from 'zustand/middleware';
 
 import * as api from '@/api';
 
-import { FilterType, Genre, GenreQuery, Movie, MovieResults } from '@/types';
+import { GenreQuery, MovieResults } from '@/types';
+import MovieStoreType from './types';
 
-interface MovieStore {
-  currentPage: number;
-  movieList: Partial<MovieResults>;
-  movieInfo: Partial<Movie>;
-  filters: FilterType;
-  meta: {
-    genres: Genre[];
-  };
-  setMovieList(movieList: MovieResults): void;
-  setCurrentMovie(movieInfo: Movie): void;
-  setPage(page: number): void;
-  fetchGenreList(): void;
-  fetchMovieList(): void;
-  setFilters(filters: FilterType): void;
-}
-
-const useStore = create<MovieStore>()(
+const useStore = create<MovieStoreType>()(
   devtools((set, get) => ({
     currentPage: 1,
     movieList: {},
     movieInfo: {},
     filters: {
-      search: '',
+      query: '',
       genre: 0,
     },
     meta: {
@@ -37,9 +22,10 @@ const useStore = create<MovieStore>()(
     setMovieList: (movieList) =>
       set(() => ({ movieList }), false, 'setMovieList'),
 
-    setCurrentMovie: (movieInfo) => set(() => ({ movieInfo })),
+    setCurrentMovie: (movieInfo) =>
+      set(() => ({ movieInfo }), false, 'setCurrentMovie'),
 
-    setPage: (page) => set(() => ({ currentPage: page })),
+    setPage: (page) => set(() => ({ currentPage: page }), false, 'setPage'),
 
     fetchGenreList: async () => {
       const { genres } = await api.get<GenreQuery>(`/genre/movie/list`);
@@ -51,16 +37,17 @@ const useStore = create<MovieStore>()(
       );
     },
 
-    fetchMovieList: async () => {
-      const data = await api.get<MovieResults>('/trending/movie/day', {
+    fetchMovieList: async (path) => {
+      const data = await api.get<MovieResults>(path, {
         ...get().filters,
+        page: get().currentPage,
         sort_by: 'popularity.desc',
       });
 
       set(() => ({ movieList: data }), false, 'fetchMovieList');
     },
 
-    setFilters: (filters) => set(() => ({ filters })),
+    setFilters: (filters) => set(() => ({ filters }), false, 'setFilters'),
   }))
 );
 

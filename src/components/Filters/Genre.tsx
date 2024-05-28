@@ -14,9 +14,9 @@ type GenreFilterProps = {
   genres: Genre[];
 } & ControllerRenderProps<FilterType, 'genre'>;
 
-const GenreFilter = ({ genres }: GenreFilterProps) => {
+const GenreFilter = ({ genres, ...props }: GenreFilterProps) => {
   return (
-    <Select>
+    <Select onValueChange={props.onChange}>
       <SelectTrigger>
         <SelectValue placeholder="Selecione um gênero..." />
       </SelectTrigger>
