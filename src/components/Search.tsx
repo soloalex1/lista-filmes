@@ -2,7 +2,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 
 import { Input } from './ui/input';
 
-import useDebounce from '@/hooks/useDebounce';
+// import useDebounce from '@/hooks/useDebounce';
 
 import { FilterType } from '@/types';
 
@@ -10,8 +10,8 @@ type SearchProps = {
   show: boolean;
 } & ControllerRenderProps<FilterType, 'query'>;
 
-const Search = ({ show, ...props }: SearchProps) => {
-  const debounceQuery = useDebounce(props.value!);
+const Search = ({ ...props }: SearchProps) => {
+  // const debounceQuery = useDebounce(props.value!);
 
   // const movieSearch = useCallback(
   //   async (query: string) => {
