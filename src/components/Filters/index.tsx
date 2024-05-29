@@ -39,20 +39,22 @@ const Filters = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8">
-      <legend>Pesquisa de filmes</legend>
-      <Controller
-        control={control}
-        name="genre"
-        render={({ field }) => <GenreFilter genres={genres} {...field} />}
-      />
+      <legend>Filtros</legend>
+      <fieldset className="w-full my-2 px-2 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-2 gap-4">
+        <Controller
+          control={control}
+          name="genre"
+          render={({ field }) => <GenreFilter genres={genres} {...field} />}
+        />
 
-      <Controller
-        control={control}
-        name="query"
-        render={({ field }) => (
-          <Input placeholder="Procure por um filme..." {...field} />
-        )}
-      />
+        <Controller
+          control={control}
+          name="query"
+          render={({ field }) => (
+            <Input placeholder="Procure por um filme..." {...field} />
+          )}
+        />
+      </fieldset>
     </form>
   );
 };
