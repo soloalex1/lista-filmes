@@ -32,7 +32,7 @@ const MoviePagination = ({ page, onChangePage }: PaginationProps) => {
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem title="Anterior">
+        <PaginationItem title="Página anterior">
           <PaginationPrevious
             aria-disabled={isFirstPage}
             className={`${
@@ -45,23 +45,25 @@ const MoviePagination = ({ page, onChangePage }: PaginationProps) => {
         </PaginationItem>
         {!isFirstPage && (
           <PaginationItem onClick={() => goToPage(currentPage - 1)}>
-            <PaginationLink>{currentPage - 1}</PaginationLink>
+            <PaginationLink>
+              {currentPage ? currentPage - 1 : '-'}
+            </PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem>
           <PaginationLink isActive>{currentPage}</PaginationLink>
         </PaginationItem>
         <PaginationItem onClick={() => goToPage(currentPage + 1)}>
-          <PaginationLink>{currentPage + 1}</PaginationLink>
+          <PaginationLink>{currentPage ? currentPage + 1 : '-'}</PaginationLink>
         </PaginationItem>
         {isFirstPage && (
           <PaginationItem>
             <PaginationLink onClick={() => goToPage(currentPage + 2)}>
-              {currentPage + 2}
+              {currentPage ? currentPage + 2 : '-'}
             </PaginationLink>
           </PaginationItem>
         )}
-        <PaginationItem title="Próxima">
+        <PaginationItem title="Próxima página">
           <PaginationNext onClick={nextPage} />
         </PaginationItem>
       </PaginationContent>
