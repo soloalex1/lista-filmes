@@ -6,8 +6,14 @@ import * as api from '@/api';
 import { GenreQuery, MovieResults } from '@/types';
 import MovieStoreType from './types';
 
+enum Queries {
+  Trending = 'fetchInitialMovieList',
+  Search = 'fetchMovieList',
+}
+
 const useStore = create<MovieStoreType>()(
   devtools((set, get) => ({
+    currentQuery: '',
     movieList: {
       page: 1,
       results: [],
@@ -28,12 +34,21 @@ const useStore = create<MovieStoreType>()(
     setCurrentMovie: (movieInfo) =>
       set(() => ({ movieInfo }), false, 'setCurrentMovie'),
 
-    setPage: (page) =>
+    setPage: (page) => {
       set(
         () => ({ movieList: { ...get().movieList, page } }),
         false,
         'setPage'
-      ),
+      );
+
+      if (get().currentQuery == Queries.Trending) {
+        get().fetchInitialMovieList();
+      }
+
+      if (get().currentQuery == Queries.Search) {
+        get().fetchMovieList();
+      }
+    },
 
     fetchGenreList: async () => {
       const { genres } = await api.get<GenreQuery>(`/genre/movie/list`);
@@ -46,9 +61,15 @@ const useStore = create<MovieStoreType>()(
     },
 
     fetchInitialMovieList: async () => {
-      const data = await api.get<MovieResults>('/trending/movie/day');
+      const data = await api.get<MovieResults>('/trending/movie/day', {
+        page: get().movieList.page,
+      });
 
-      set(() => ({ movieList: data }), false, 'fetchInitialMovieList');
+      set(
+        () => ({ movieList: data, currentQuery: Queries.Trending }),
+        false,
+        'fetchInitialMovieList'
+      );
     },
 
     fetchMovieList: async () => {
@@ -57,7 +78,11 @@ const useStore = create<MovieStoreType>()(
         page: get().movieList.page,
       });
 
-      set(() => ({ movieList: data }), false, 'fetchMovieList');
+      set(
+        () => ({ movieList: data, currentQuery: Queries.Search }),
+        false,
+        'fetchMovieList'
+      );
     },
 
     setFilters: (filters) => {

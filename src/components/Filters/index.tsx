@@ -9,13 +9,10 @@ import { FilterType } from '@/types';
 
 const Filters = () => {
   const {
-    meta: { genres },
-    movieList: { page },
     filters,
     setFilters,
     setPage,
     fetchGenreList,
-    fetchMovieList,
     fetchInitialMovieList,
   } = useStore((state) => state);
 
@@ -35,16 +32,16 @@ const Filters = () => {
     [setFilters, setPage]
   );
 
-  useEffect(() => {
-    fetchGenreList();
-    fetchInitialMovieList();
-  }, [fetchGenreList, fetchInitialMovieList]);
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onSearch = useCallback(
     debounce(() => handleSubmit(onSubmit)(), 500),
     []
   );
+
+  useEffect(() => {
+    fetchGenreList();
+    fetchInitialMovieList();
+  }, [fetchGenreList, fetchInitialMovieList]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8">

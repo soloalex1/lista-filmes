@@ -11,7 +11,7 @@ export const get = async <T>(path: string, params?: unknown): Promise<T> => {
     language: 'pt-BR',
   }).toString();
 
-  const response = await fetch(`https://api.themoviedb.org/3${path}?${query}`, {
+  const response = await fetch(`${BASE_URL}/${path}?${query}`, {
     method: 'GET',
   });
 

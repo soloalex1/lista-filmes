@@ -1,6 +1,7 @@
 import { FilterType, Genre, Movie, MovieResults } from '@/types';
 
 export default interface MovieStoreType {
+  currentQuery: string;
   movieList: MovieResults;
   movieInfo: Partial<Movie>;
   filters: FilterType;
