@@ -34,11 +34,15 @@ export type Genre = {
   name: string;
 };
 
+export type GenreQuery = {
+  genres: Genre[];
+};
+
 export type VideoEntry = {
   id: string;
   name: string;
   key: string;
-  site: "YouTube" | "Vimeo";
+  site: 'YouTube' | 'Vimeo';
 };
 
 export type Credit = {
@@ -62,3 +66,8 @@ export type CrewEntry = {
   department: string;
   job: string;
 } & Credit;
+
+export type FilterType = {
+  query?: string;
+  year?: number;
+};

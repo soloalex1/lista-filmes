@@ -1,7 +1,7 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import HomePage from "@/containers/pages/HomePage";
-import MoviePage from "@/containers/pages/MoviePage";
+import HomePage from '@/containers/pages/Home';
+import MoviePage from '@/containers/pages/MoviePage';
 
 const App = () => (
   <BrowserRouter>
@@ -13,4 +13,3 @@ const App = () => (
 );
 
 export default App;
-
