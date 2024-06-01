@@ -1,8 +1,7 @@
 import { FilterType, Genre, Movie, MovieResults } from '@/types';
 
 export default interface MovieStoreType {
-  currentPage: number;
-  movieList: Partial<MovieResults>;
+  movieList: MovieResults;
   movieInfo: Partial<Movie>;
   filters: FilterType;
   meta: {
@@ -12,6 +11,7 @@ export default interface MovieStoreType {
   setCurrentMovie(movieInfo: Movie): void;
   setPage(page: number): void;
   fetchGenreList(): void;
-  fetchMovieList(path: string): void;
+  fetchInitialMovieList(): void;
+  fetchMovieList(): void;
   setFilters(filters: FilterType): void;
 }

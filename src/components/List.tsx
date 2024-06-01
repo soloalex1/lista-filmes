@@ -8,7 +8,7 @@ type ListProps = {
 
 const List = ({ movies }: ListProps) => {
   return (
-    <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
+    <section className="px-2 sm:px-0 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
       {movies?.length > 0 &&
         movies.map((movie) => <Card key={movie.id} movie={movie} />)}
     </section>

@@ -9,25 +9,27 @@ import {
 
 import useStore from '@/store';
 
-type PaginationProps = {
-  page: number;
-  onChangePage(page: number): void;
-};
+const MoviePagination = () => {
+  const {
+    movieList: { page, total_pages },
+    setPage,
+  } = useStore((state) => state)!;
 
-const MoviePagination = ({ page, onChangePage }: PaginationProps) => {
-  const currentPage = useStore((state) => state.movieList?.page)!;
+  const isFirstPage = page === 1;
 
-  const isFirstPage = currentPage === 1;
-
-  const nextPage = () => onChangePage(page + 1);
+  const isLastPage = page >= total_pages;
 
   const prevPage = () => {
     if (!isFirstPage) {
-      onChangePage(page - 1);
+      setPage(page - 1);
     }
   };
 
-  const goToPage = (page: number) => onChangePage(page);
+  const nextPage = () => {
+    if (!isLastPage) {
+      setPage(page + 1);
+    }
+  };
 
   return (
     <Pagination>
@@ -35,36 +37,42 @@ const MoviePagination = ({ page, onChangePage }: PaginationProps) => {
         <PaginationItem title="Página anterior">
           <PaginationPrevious
             aria-disabled={isFirstPage}
+            onClick={prevPage}
             className={`${
               isFirstPage
                 ? 'pointer-events-none cursor-default text-gray-400'
                 : ''
             }`}
-            onClick={prevPage}
           />
         </PaginationItem>
         {!isFirstPage && (
-          <PaginationItem onClick={() => goToPage(currentPage - 1)}>
-            <PaginationLink>
-              {currentPage ? currentPage - 1 : '-'}
-            </PaginationLink>
+          <PaginationItem onClick={() => setPage(page - 1)}>
+            <PaginationLink>{page ? page - 1 : '-'}</PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem>
-          <PaginationLink isActive>{currentPage}</PaginationLink>
+          <PaginationLink isActive>{page}</PaginationLink>
         </PaginationItem>
-        <PaginationItem onClick={() => goToPage(currentPage + 1)}>
-          <PaginationLink>{currentPage ? currentPage + 1 : '-'}</PaginationLink>
+        <PaginationItem onClick={() => setPage(page + 1)}>
+          <PaginationLink>{page ? page + 1 : '-'}</PaginationLink>
         </PaginationItem>
         {isFirstPage && (
           <PaginationItem>
-            <PaginationLink onClick={() => goToPage(currentPage + 2)}>
-              {currentPage ? currentPage + 2 : '-'}
+            <PaginationLink onClick={() => setPage(page + 2)}>
+              {page ? page + 2 : '-'}
             </PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem title="Próxima página">
-          <PaginationNext onClick={nextPage} />
+          <PaginationNext
+            aria-disabled={isLastPage}
+            onClick={nextPage}
+            className={`${
+              isLastPage
+                ? 'pointer-events-none cursor-default text-gray-400'
+                : ''
+            }`}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
