@@ -69,6 +69,5 @@ export type CrewEntry = {
 
 export type FilterType = {
   query?: string;
-  genre?: number;
   year?: number;
 };

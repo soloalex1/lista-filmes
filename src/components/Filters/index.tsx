@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import debounce from 'lodash.debounce';
 
-import GenreFilter from './Genre';
 import { Input } from '../ui/input';
 
 import useStore from '@/store';
@@ -10,48 +10,58 @@ import { FilterType } from '@/types';
 const Filters = () => {
   const {
     meta: { genres },
+    movieList: { page },
     filters,
     setFilters,
+    setPage,
     fetchGenreList,
+    fetchMovieList,
+    fetchInitialMovieList,
   } = useStore((state) => state);
 
-  const { handleSubmit, control, watch } = useForm<FilterType>({
+  const { handleSubmit, control } = useForm<FilterType>({
     mode: 'onChange',
-    defaultValues: filters,
+    defaultValues: {
+      query: filters.query,
+    },
   });
 
   const onSubmit: SubmitHandler<FilterType> = useCallback(
     (data, event) => {
       event?.preventDefault();
+      setPage(1);
       setFilters(data);
     },
-    [setFilters]
+    [setFilters, setPage]
   );
 
   useEffect(() => {
     fetchGenreList();
-  }, [fetchGenreList]);
+    fetchInitialMovieList();
+  }, [fetchGenreList, fetchInitialMovieList]);
 
-  useEffect(() => {
-    const subscription = watch(() => handleSubmit(onSubmit)());
-    return () => subscription.unsubscribe();
-  }, [handleSubmit, onSubmit, watch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onSearch = useCallback(
+    debounce(() => handleSubmit(onSubmit)(), 500),
+    []
+  );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8">
-      <legend>Filtros</legend>
-      <fieldset className="w-full my-2 px-2 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-2 gap-4">
-        <Controller
-          control={control}
-          name="genre"
-          render={({ field }) => <GenreFilter genres={genres} {...field} />}
-        />
-
+      <legend className="px-2 text-lg font-bold">Filtros</legend>
+      <fieldset className="w-full my-2 px-2 grid grid-rows-2 sm:grid-rows-1 grid-cols-1 sm:grid-cols-4 gap-4">
         <Controller
           control={control}
           name="query"
           render={({ field }) => (
-            <Input placeholder="Procure por um filme..." {...field} />
+            <Input
+              placeholder="Procure por um filme..."
+              {...field}
+              onChange={(e) => {
+                field.onChange(e);
+                onSearch();
+              }}
+            />
           )}
         />
       </fieldset>

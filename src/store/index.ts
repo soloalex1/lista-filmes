@@ -60,7 +60,11 @@ const useStore = create<MovieStoreType>()(
       set(() => ({ movieList: data }), false, 'fetchMovieList');
     },
 
-    setFilters: (filters) => set(() => ({ filters }), false, 'setFilters'),
+    setFilters: (filters) => {
+      set(() => ({ filters }), false, 'setFilters');
+
+      get().fetchMovieList();
+    },
   }))
 );
 
