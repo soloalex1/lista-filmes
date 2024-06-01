@@ -53,10 +53,12 @@ const MoviePagination = () => {
         <PaginationItem>
           <PaginationLink isActive>{page}</PaginationLink>
         </PaginationItem>
-        <PaginationItem onClick={() => setPage(page + 1)}>
-          <PaginationLink>{page ? page + 1 : '-'}</PaginationLink>
-        </PaginationItem>
-        {isFirstPage && (
+        {!isLastPage && (
+          <PaginationItem onClick={() => setPage(page + 1)}>
+            <PaginationLink>{page ? page + 1 : '-'}</PaginationLink>
+          </PaginationItem>
+        )}
+        {isFirstPage && !isLastPage && (
           <PaginationItem>
             <PaginationLink onClick={() => setPage(page + 2)}>
               {page ? page + 2 : '-'}

@@ -88,6 +88,11 @@ const useStore = create<MovieStoreType>()(
     setFilters: (filters) => {
       set(() => ({ filters }), false, 'setFilters');
 
+      if (!filters.query) {
+        get().fetchInitialMovieList();
+        return;
+      }
+
       get().fetchMovieList();
     },
   }))
