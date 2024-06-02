@@ -9,5 +9,5 @@ export const getProfileInitials = (name: string): string => {
   return name
     .split(' ')
     .slice(0, 2)
-    .reduce((acc, curr) => `${acc}${curr}`, '');
+    .reduce((acc, curr) => `${acc}${curr[0]}`, '');
 };
