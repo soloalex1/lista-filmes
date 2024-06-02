@@ -20,15 +20,11 @@ const MoviePagination = () => {
   const isLastPage = page >= total_pages;
 
   const prevPage = () => {
-    if (!isFirstPage) {
-      setPage(page - 1);
-    }
+    if (!isFirstPage) setPage(page - 1);
   };
 
   const nextPage = () => {
-    if (!isLastPage) {
-      setPage(page + 1);
-    }
+    if (!isLastPage) setPage(page + 1);
   };
 
   return (

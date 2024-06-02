@@ -1,8 +1,8 @@
-import Chip from "@/components/Chip";
-import { CastEntry, Movie } from "@/types";
+import Chip from '@/components/Chip';
+import { CastEntry, Movie } from '@/types';
 
 type InfoProps = {
-  movie: Movie | undefined;
+  movie: Partial<Movie>;
   cast: CastEntry[];
 };
 

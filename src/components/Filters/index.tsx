@@ -8,13 +8,9 @@ import useStore from '@/store';
 import { FilterType } from '@/types';
 
 const Filters = () => {
-  const {
-    filters,
-    setFilters,
-    setPage,
-    fetchGenreList,
-    fetchInitialMovieList,
-  } = useStore((state) => state);
+  const { filters, setFilters, setPage, fetchInitialMovieList } = useStore(
+    (state) => state
+  );
 
   const { handleSubmit, control } = useForm<FilterType>({
     mode: 'onChange',
@@ -34,14 +30,13 @@ const Filters = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onSearch = useCallback(
-    debounce(() => handleSubmit(onSubmit)(), 500),
+    debounce(() => handleSubmit(onSubmit)(), 1000),
     []
   );
 
   useEffect(() => {
-    fetchGenreList();
     fetchInitialMovieList();
-  }, [fetchGenreList, fetchInitialMovieList]);
+  }, [fetchInitialMovieList]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8">
