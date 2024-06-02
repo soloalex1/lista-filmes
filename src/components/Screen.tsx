@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Header from '@/components/Header';
-
 type ScreenProps = {
   children: JSX.Element | JSX.Element[];
 };
