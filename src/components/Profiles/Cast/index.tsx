@@ -19,9 +19,11 @@ const CastProfile = ({ profile }: CastProfileProps) => {
       </Avatar>
       <div>
         <h3 className="text-lg font-semibold">{profile.name}</h3>
-        <p className="text-gray-500 dark:text-gray-400">
-          como {profile.character}
-        </p>
+        {profile.character && (
+          <p className="text-gray-500 dark:text-gray-400">
+            como {profile.character}
+          </p>
+        )}
       </div>
     </div>
   );

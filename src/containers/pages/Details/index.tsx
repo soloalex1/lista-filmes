@@ -41,7 +41,7 @@ const DetailsPage = ({
     <Screen>
       <DetailsHeader />
 
-      <div className=" col-full relative h-[70dvh] w-full overflow-hidden">
+      <div className=" col-full relative h-[75dvh] w-full overflow-hidden">
         <img
           className="h-full w-full object-cover object-left-top"
           loading="lazy"
