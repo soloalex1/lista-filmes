@@ -2,7 +2,7 @@ import { ArrowLeftIcon } from 'lucide-react';
 
 const DetailsHeader = () => {
   return (
-    <div className="px-4 lg:px-0 py-4 md:py-6 flex items-center justify-between w-full col-start-2">
+    <div className="col-full px-4 py-4 md:py-6 flex items-center justify-start w-full">
       <a
         href="/"
         className="inline-flex items-center gap-2 rounded-md bg-gray-900/50 px-3 py-2

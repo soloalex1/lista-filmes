@@ -3,10 +3,10 @@ import { lazy, useEffect, Suspense } from 'react';
 import Screen from '@/components/Screen';
 import DetailsHeader from '@/components/DetailsHeader';
 import TrailersSkeleton from '@/components/Trailers/skeleton';
+import Direction from '@/components/Direction';
+import Cast from '@/components/Cast';
 
 import useStore from '@/store';
-import Cast from '@/components/Cast';
-import Direction from '@/components/Direction';
 
 type MovieScreenProps = {
   match: {
@@ -41,9 +41,9 @@ const DetailsPage = ({
     <Screen>
       <DetailsHeader />
 
-      <div className=" col-full relative h-[75dvh] w-full overflow-hidden">
+      <div className="col-full relative h-[75dvh] w-full overflow-hidden">
         <img
-          className="h-full w-full object-cover object-left-top"
+          className="h-full w-full object-cover object-center xl:object-left-top"
           loading="lazy"
           src={`https://image.tmdb.org/t/p/original/${movieInfo?.backdrop_path}`}
           alt={`Imagem promocional do filme ${movieInfo?.title}`}
