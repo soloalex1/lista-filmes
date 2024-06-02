@@ -42,7 +42,7 @@ export type VideoEntry = {
   id: string;
   name: string;
   key: string;
-  site: 'YouTube' | 'Vimeo';
+  site: string;
 };
 
 export type Credit = {
