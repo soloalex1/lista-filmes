@@ -1,22 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
+import { getProfileInitials } from '@/lib/utils';
+
 import { CastEntry } from '@/types';
 
-type ProfileProps = {
+type CastProfileProps = {
   profile: CastEntry;
 };
 
-const Profile = ({ profile }: ProfileProps) => {
-  const getProfileInitials = ({ name }: CastEntry) =>
-    name.split(' ').reduce((acc, curr) => `${acc}${curr}`, '');
-
+const CastProfile = ({ profile }: CastProfileProps) => {
   return (
     <div className="flex items-center gap-4" key={profile.cast_id}>
       <Avatar>
         <AvatarImage
           src={`https://image.tmdb.org/t/p/original/${profile.profile_path}`}
         />
-        <AvatarFallback>{getProfileInitials(profile)}</AvatarFallback>
+        <AvatarFallback>{getProfileInitials(profile.name)}</AvatarFallback>
       </Avatar>
       <div>
         <h3 className="text-lg font-semibold">{profile.name}</h3>
@@ -28,4 +27,4 @@ const Profile = ({ profile }: ProfileProps) => {
   );
 };
 
-export default Profile;
+export default CastProfile;

@@ -6,6 +6,7 @@ import TrailersSkeleton from '@/components/Trailers/skeleton';
 
 import useStore from '@/store';
 import Cast from '@/components/Cast';
+import Direction from '@/components/Direction';
 
 // import { CastEntry } from '@/types';
 
@@ -109,6 +110,7 @@ const DetailsPage = ({
               <p>{movieInfo?.overview}</p>
             </div>
           </section>
+          <Direction />
           <Cast />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import Profile from '@/components/Profile';
+import CastProfile from '@/components/Profiles/Cast';
 
 import useStore from '@/store';
 
@@ -15,7 +15,7 @@ const Cast = () => {
       </h2>
       <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cast.map((profile) => (
-          <Profile profile={profile} key={profile.cast_id} />
+          <CastProfile profile={profile} key={profile.cast_id} />
         ))}
       </div>
     </section>
