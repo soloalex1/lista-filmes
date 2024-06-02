@@ -13,7 +13,9 @@ const CastProfile = ({ profile }: CastProfileProps) => {
     <div className="flex items-center gap-4" key={profile.cast_id}>
       <Avatar>
         <AvatarImage
+          alt={`Foto de perfil de ${profile.name}`}
           src={`https://image.tmdb.org/t/p/original/${profile.profile_path}`}
+          loading="lazy"
         />
         <AvatarFallback>{getProfileInitials(profile.name)}</AvatarFallback>
       </Avatar>

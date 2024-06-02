@@ -13,7 +13,9 @@ const DirectorProfile = ({ director }: DirectorProfileProps) => {
     <div className="flex items-center gap-4">
       <Avatar>
         <AvatarImage
+          alt={`Foto de perfil de ${director.name}`}
           src={`https://image.tmdb.org/t/p/original/${director.profile_path}`}
+          loading="lazy"
         />
         <AvatarFallback>{getProfileInitials(director.name)}</AvatarFallback>
       </Avatar>
