@@ -19,7 +19,7 @@ export type Movie = {
   release_date: string;
   tagline: string;
   title: string;
-  video: false;
+  video: boolean;
   videos: {
     results: VideoEntry[];
   };
