@@ -2,11 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { VideoEntry } from '@/types';
 
-enum VideoSources {
-  Youtube = 'Youtube',
-  Vimeo = 'Vimeo',
-}
-
 type VideoCardProps = {
   video: VideoEntry;
 };
@@ -15,11 +10,11 @@ const VideoCard = ({ video }: VideoCardProps) => {
   const [url, setURL] = useState('');
 
   useEffect(() => {
-    if (video.site === VideoSources.Youtube) {
+    if (video.site === 'YouTube') {
       setURL(`https://www.youtube.com/embed/${video.key}`);
     }
 
-    if (video.site === VideoSources.Vimeo) {
+    if (video.site === 'Vimeo') {
       setURL(`https://vimeo.com/${video.key}`);
     }
   }, [video]);

@@ -8,8 +8,6 @@ import useStore from '@/store';
 import Cast from '@/components/Cast';
 import Direction from '@/components/Direction';
 
-// import { CastEntry } from '@/types';
-
 type MovieScreenProps = {
   match: {
     params: {
@@ -27,9 +25,6 @@ const DetailsPage = ({
 
   const { movieInfo, fetchMovieDetails } = useStore();
 
-  // const [cast, setCast] = useState<CastEntry[]>([]);
-  // const [directors, setDirectors] = useState('');
-
   const getMovieDate = movieInfo?.release_date
     ? new Date(movieInfo.release_date).getFullYear()
     : '-';
@@ -41,27 +36,6 @@ const DetailsPage = ({
   useEffect(() => {
     fetchMovieDetails(id);
   }, [fetchMovieDetails, id]);
-
-  // useEffect(() => {
-  //   if (movieInfo) {
-  //     setCast(
-  //       movieInfo?.credits!.cast!.filter(
-  //         ({ order, known_for_department }) =>
-  //           order < 5 && known_for_department === 'Acting'
-  //       )
-  //     );
-
-  //     const directorList = movieInfo?.credits!.crew.filter(
-  //       ({ job }) => job === 'Director'
-  //     );
-
-  //     setDirectors(
-  //       directorList.length === 1
-  //         ? directorList[0].name
-  //         : directorList.map(({ name }) => name).join(', ')
-  //     );
-  //   }
-  // }, [movieInfo]);
 
   return (
     <Screen>
