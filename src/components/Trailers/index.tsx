@@ -1,4 +1,4 @@
-import VideoCard from '../VideoCard';
+import VideoCard from '@/components/VideoCard';
 
 import { VideoEntry } from '@/types';
 

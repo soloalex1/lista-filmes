@@ -12,17 +12,22 @@ type VideoCardProps = {
 };
 
 const VideoCard = ({ video }: VideoCardProps) => {
-  const [base, setBase] = useState('');
+  const [url, setURL] = useState('');
 
-  const getVideoURL =
-    video.site === VideoSources.Youtube
-      ? `https://www.youtube.com/embed/${video.key}`
-      : `https://vimeo.com/${video.key}`;
+  useEffect(() => {
+    if (video.site === VideoSources.Youtube) {
+      setURL(`https://www.youtube.com/embed/${video.key}`);
+    }
+
+    if (video.site === VideoSources.Vimeo) {
+      setURL(`https://vimeo.com/${video.key}`);
+    }
+  }, [video]);
 
   return (
     <div className="aspect-video overflow-hidden rounded-lg">
       <iframe
-        src={getVideoURL}
+        src={url}
         title={video.name}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

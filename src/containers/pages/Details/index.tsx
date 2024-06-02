@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
+import { lazy, useEffect, Suspense } from 'react';
 
-// import Info from '@/components/Info';
 import Screen from '@/components/Screen';
 import DetailsHeader from '@/components/DetailsHeader';
-import Trailers from '@/components/Trailers';
+import TrailersSkeleton from '@/components/Trailers/skeleton';
 
 import useStore from '@/store';
 
@@ -22,6 +21,8 @@ const DetailsPage = ({
     params: { id },
   },
 }: MovieScreenProps) => {
+  const Trailers = lazy(() => import('@/components/Trailers'));
+
   const { movieInfo, fetchMovieDetails } = useStore();
 
   // const [cast, setCast] = useState<CastEntry[]>([]);
@@ -91,9 +92,11 @@ const DetailsPage = ({
       <div className="col-start-2 px-4 md:px-6 py-12 md:py-16">
         <div className="mx-auto max-w-3xl space-y-8">
           {/* eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain */}
-          {!!movieInfo?.videos?.results.length && (
-            <Trailers videos={movieInfo.videos?.results} />
-          )}
+          <Suspense fallback={<TrailersSkeleton />}>
+            {!!movieInfo?.videos?.results.length && (
+              <Trailers videos={movieInfo.videos?.results} />
+            )}
+          </Suspense>
           <section aria-labelledby="section-about">
             <h2
               id="section-about"
