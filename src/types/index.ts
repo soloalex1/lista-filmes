@@ -19,7 +19,7 @@ export type Movie = {
   release_date: string;
   tagline: string;
   title: string;
-  video: false;
+  video: boolean;
   videos: {
     results: VideoEntry[];
   };
@@ -42,7 +42,7 @@ export type VideoEntry = {
   id: string;
   name: string;
   key: string;
-  site: 'YouTube' | 'Vimeo';
+  site: string;
 };
 
 export type Credit = {

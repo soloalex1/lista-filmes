@@ -3,7 +3,7 @@ import { devtools } from 'zustand/middleware';
 
 import * as api from '@/api';
 
-import { GenreQuery, MovieResults } from '@/types';
+import { Movie, MovieResults } from '@/types';
 import MovieStoreType from './types';
 
 enum Queries {
@@ -14,6 +14,8 @@ enum Queries {
 const useStore = create<MovieStoreType>()(
   devtools((set, get) => ({
     currentQuery: '',
+    cast: [],
+    directors: [],
     movieList: {
       page: 1,
       results: [],
@@ -24,16 +26,6 @@ const useStore = create<MovieStoreType>()(
     filters: {
       query: '',
     },
-    meta: {
-      genres: [],
-    },
-
-    setMovieList: (movieList) =>
-      set(() => ({ movieList }), false, 'setMovieList'),
-
-    setCurrentMovie: (movieInfo) =>
-      set(() => ({ movieInfo }), false, 'setCurrentMovie'),
-
     setPage: (page) => {
       set(
         () => ({ movieList: { ...get().movieList, page } }),
@@ -43,46 +35,12 @@ const useStore = create<MovieStoreType>()(
 
       if (get().currentQuery == Queries.Trending) {
         get().fetchInitialMovieList();
+        return;
       }
 
       if (get().currentQuery == Queries.Search) {
         get().fetchMovieList();
       }
-    },
-
-    fetchGenreList: async () => {
-      const { genres } = await api.get<GenreQuery>(`/genre/movie/list`);
-
-      set(
-        (state) => ({ meta: { ...state.meta, genres } }),
-        false,
-        'fetchGenreList'
-      );
-    },
-
-    fetchInitialMovieList: async () => {
-      const data = await api.get<MovieResults>('/trending/movie/day', {
-        page: get().movieList.page,
-      });
-
-      set(
-        () => ({ movieList: data, currentQuery: Queries.Trending }),
-        false,
-        'fetchInitialMovieList'
-      );
-    },
-
-    fetchMovieList: async () => {
-      const data = await api.get<MovieResults>('/search/movie', {
-        ...get().filters,
-        page: get().movieList.page,
-      });
-
-      set(
-        () => ({ movieList: data, currentQuery: Queries.Search }),
-        false,
-        'fetchMovieList'
-      );
     },
 
     setFilters: (filters) => {
@@ -94,6 +52,48 @@ const useStore = create<MovieStoreType>()(
       }
 
       get().fetchMovieList();
+    },
+
+    fetchInitialMovieList: async () => {
+      const movieList = await api.get<MovieResults>('/trending/movie/day', {
+        page: get().movieList.page,
+      });
+
+      set(
+        () => ({ movieList, currentQuery: Queries.Trending }),
+        false,
+        'fetchInitialMovieList'
+      );
+    },
+
+    fetchMovieList: async () => {
+      const movieList = await api.get<MovieResults>('/search/movie', {
+        ...get().filters,
+        page: get().movieList.page,
+      });
+
+      set(
+        () => ({ movieList, currentQuery: Queries.Search }),
+        false,
+        'fetchMovieList'
+      );
+    },
+
+    fetchMovieDetails: async (id) => {
+      const movieInfo = await api.get<Movie>(`/movie/${id}`, {
+        append_to_response: 'videos,credits',
+      });
+
+      const cast = movieInfo.credits.cast.filter(
+        ({ order, known_for_department }) =>
+          order < 9 && known_for_department === 'Acting'
+      );
+
+      const directors = movieInfo?.credits!.crew.filter(
+        ({ job }) => job === 'Director'
+      );
+
+      set(() => ({ movieInfo, cast, directors }), false, 'fetchMovieDetails');
     },
   }))
 );
