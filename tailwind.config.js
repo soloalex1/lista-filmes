@@ -24,6 +24,9 @@ module.exports = {
       gridTemplateColumns: {
         main: '1fr min(140ch, 100%) 1fr',
       },
+      gridColumn: {
+        full: '1 / -1',
+      },
       lineClamp: {
         7: '7',
         8: '8',
