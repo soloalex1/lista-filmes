@@ -14,6 +14,8 @@ enum Queries {
 const useStore = create<MovieStoreType>()(
   devtools((set, get) => ({
     currentQuery: '',
+    cast: [],
+    directors: [],
     movieList: {
       page: 1,
       results: [],
@@ -82,7 +84,16 @@ const useStore = create<MovieStoreType>()(
         append_to_response: 'videos,credits',
       });
 
-      set(() => ({ movieInfo }), false, 'fetchMovieDetails');
+      const cast = movieInfo.credits.cast.filter(
+        ({ order, known_for_department }) =>
+          order < 9 && known_for_department === 'Acting'
+      );
+
+      const directors = movieInfo?.credits!.crew.filter(
+        ({ job }) => job === 'Director'
+      );
+
+      set(() => ({ movieInfo, cast, directors }), false, 'fetchMovieDetails');
     },
   }))
 );

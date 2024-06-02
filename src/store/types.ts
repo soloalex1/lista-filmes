@@ -1,6 +1,8 @@
-import { FilterType, Movie, MovieResults } from '@/types';
+import { CastEntry, CrewEntry, FilterType, Movie, MovieResults } from '@/types';
 
 export default interface MovieStoreType {
+  cast: CastEntry[];
+  directors: CrewEntry[];
   currentQuery: string;
   movieList: MovieResults;
   movieInfo: Partial<Movie>;

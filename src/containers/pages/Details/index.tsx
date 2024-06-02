@@ -5,6 +5,7 @@ import DetailsHeader from '@/components/DetailsHeader';
 import TrailersSkeleton from '@/components/Trailers/skeleton';
 
 import useStore from '@/store';
+import Cast from '@/components/Cast';
 
 // import { CastEntry } from '@/types';
 
@@ -67,7 +68,7 @@ const DetailsPage = ({
 
       <div className=" col-full relative h-[70dvh] w-full overflow-hidden">
         <img
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-left-top"
           loading="lazy"
           src={`https://image.tmdb.org/t/p/original/${movieInfo?.backdrop_path}`}
           alt={`Imagem promocional do filme ${movieInfo?.title}`}
@@ -108,6 +109,7 @@ const DetailsPage = ({
               <p>{movieInfo?.overview}</p>
             </div>
           </section>
+          <Cast />
         </div>
       </div>
     </Screen>
