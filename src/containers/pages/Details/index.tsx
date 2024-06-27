@@ -2,12 +2,13 @@ import { lazy, useEffect, Suspense } from 'react';
 
 import Screen from '@/components/Screen';
 import DetailsHeader from '@/components/DetailsHeader';
+
 import TrailersSkeleton from '@/components/Trailers/skeleton';
-import Direction from '@/components/Direction';
-import Cast from '@/components/Cast';
 import AboutSkeleton from '@/components/About/skeleton';
+import DirectionSkeleton from '@/components/Direction/skeleton';
 
 import useStore from '@/store';
+import CastSkeleton from '@/components/Profiles/Cast/skeleton';
 
 type MovieScreenProps = {
   match: {
@@ -24,6 +25,8 @@ const DetailsPage = ({
 }: MovieScreenProps) => {
   const Trailers = lazy(() => import('@/components/Trailers'));
   const About = lazy(() => import('@/components/About'));
+  const Direction = lazy(() => import('@/components/Direction'));
+  const Cast = lazy(() => import('@/components/Cast'));
 
   const { movieInfo, fetchMovieDetails } = useStore();
 
@@ -80,8 +83,12 @@ const DetailsPage = ({
           <Suspense fallback={<AboutSkeleton />}>
             {!!movieInfo?.overview && <About movie={movieInfo} />}
           </Suspense>
-          <Direction />
-          <Cast />
+
+          <Suspense fallback={<DirectionSkeleton />}>{<Direction />}</Suspense>
+
+          <Suspense fallback={<CastSkeleton />}>
+            <Cast />
+          </Suspense>
         </div>
       </div>
     </Screen>
