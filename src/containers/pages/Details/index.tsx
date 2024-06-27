@@ -5,6 +5,7 @@ import DetailsHeader from '@/components/DetailsHeader';
 import TrailersSkeleton from '@/components/Trailers/skeleton';
 import Direction from '@/components/Direction';
 import Cast from '@/components/Cast';
+import AboutSkeleton from '@/components/About/skeleton';
 
 import useStore from '@/store';
 
@@ -22,6 +23,7 @@ const DetailsPage = ({
   },
 }: MovieScreenProps) => {
   const Trailers = lazy(() => import('@/components/Trailers'));
+  const About = lazy(() => import('@/components/About'));
 
   const { movieInfo, fetchMovieDetails } = useStore();
 
@@ -68,22 +70,16 @@ const DetailsPage = ({
       <div className="col-start-2 px-4 md:px-6 py-12 md:py-16">
         <div className="mx-auto max-w-3xl space-y-8">
           {/* eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain */}
+
           <Suspense fallback={<TrailersSkeleton />}>
             {!!movieInfo?.videos?.results.length && (
               <Trailers videos={movieInfo.videos?.results} />
             )}
           </Suspense>
-          <section aria-labelledby="section-about">
-            <h2
-              id="section-about"
-              className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl"
-            >
-              Sobre
-            </h2>
-            <div className="mt-6 space-y-4 text-lg text-gray-500 dark:text-gray-400">
-              <p>{movieInfo?.overview}</p>
-            </div>
-          </section>
+
+          <Suspense fallback={<AboutSkeleton />}>
+            {!!movieInfo?.overview && <About movie={movieInfo} />}
+          </Suspense>
           <Direction />
           <Cast />
         </div>
