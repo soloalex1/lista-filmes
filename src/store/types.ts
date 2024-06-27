@@ -5,7 +5,7 @@ export default interface MovieStoreType {
   directors: CrewEntry[];
   currentQuery: string;
   movieList: MovieResults;
-  movieInfo: Partial<Movie>;
+  movieInfo: Movie;
   filters: FilterType;
   setPage(page: number): void;
   setFilters(filters: FilterType): void;
