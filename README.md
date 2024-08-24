@@ -1,6 +1,6 @@
 # Movie List
 
-This is a simple movie list visualization web app. I've submitted the first version for a junior front-end developer application @ Agenda Edu, in late 2021 (I've landed the job :D). Currently, I'm working on structural refactors to make this project more similar to my current studies and skills, so I can use this in my portfolio.
+This is a simple movie list visualization web app that allows the user to search for movies and read their details, such as cast, director, trailers and synopsis. I've submitted the first version for a junior front-end developer application @ Agenda Edu, in late 2021 (I've landed the job :D). 
 
 ## Requirements
 
